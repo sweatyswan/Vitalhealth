@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitalhealth — low-fi prototyp (mobile-first)</title>
+<style>
+:root{
+  --surface-0:#f2f2f0; --surface-1:#e9e8e4; --surface-2:#ffffff;
+  --text-primary:#1c1c1a; --text-secondary:#5f5e5a; --text-muted:#8a8a85;
+  --border:#d8d7d2; --border-strong:#b4b2a9; --radius:8px;
+  --fill-primary:#1c1c1a; --on-primary:#ffffff;
+}
+*{box-sizing:border-box;}
+body{background:var(--surface-0);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--text-primary);margin:0;padding:24px 12px;}
+h1,h2,h3{font-weight:500;}
+button{font-family:inherit;}
+.wrap{max-width:680px;margin:0 auto;}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.mode-toggle{display:flex;border:0.5px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;}
+.mode-btn{background:var(--surface-1);color:var(--text-secondary);border:none;padding:6px 14px;font-size:13px;cursor:pointer;}
+.mode-btn.active{background:var(--fill-primary);color:var(--on-primary);}
+select,.navbtn{font-size:13px;padding:6px 12px;border-radius:var(--radius);border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer;}
+.hint{font-size:12px;color:var(--text-muted);margin:0 0 16px;}
+.center{display:flex;justify-content:center;}
+.device{background:var(--surface-2);border:2px solid var(--text-primary);overflow:hidden;}
+.device.mobile{width:340px;border-radius:28px;}
+.device.desktop{width:100%;max-width:640px;border-radius:8px;}
+.statusbar{text-align:center;font-size:11px;padding:4px 0;}
+.device.desktop .statusbar{display:none;}
+.browserbar{display:none;align-items:center;gap:6px;padding:6px 10px;border-bottom:0.5px solid var(--border);}
+.device.desktop .browserbar{display:flex;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border-strong);display:inline-block;}
+.urlbar{margin-left:8px;font-size:11px;color:var(--text-muted);background:var(--surface-1);border-radius:var(--radius);padding:2px 8px;flex:1;}
+.screen-root{padding:14px 16px 24px;height:600px;overflow-y:auto;}
+.device.desktop .screen-root{height:480px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;}
+.navlinks{display:none;gap:14px;font-size:13px;}
+.navlinks a{color:var(--text-secondary);text-decoration:none;}
+.device.desktop .navlinks{display:flex;}
+.device.desktop .mobile-only{display:none;}
+.mobile-menu{display:none;flex-direction:column;border:0.5px solid var(--border-strong);border-radius:var(--radius);background:var(--surface-2);margin-bottom:12px;overflow:hidden;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{padding:10px 12px;font-size:13px;color:var(--text-primary);text-decoration:none;border-bottom:0.5px solid var(--border);}
+.mobile-menu a:last-child{border-bottom:none;}
+.device.desktop .mobile-menu{display:none!important;}
+.hero{display:block;}
+.device.desktop .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:center;}
+.sub{font-size:13px;color:var(--text-secondary);margin:0;}
+.wf-block{background:repeating-linear-gradient(45deg,var(--surface-1),var(--surface-1) 8px,var(--surface-2) 8px,var(--surface-2) 16px);border:0.5px dashed var(--border-strong);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);margin:10px 0;}
+.goal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px;}
+.device.desktop .goal-grid{grid-template-columns:repeat(4,1fr);}
+.goal-tile{border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:10px 6px;font-size:12px;background:var(--surface-1);cursor:pointer;color:var(--text-primary);}
+.rating-badge{display:inline-block;margin-top:8px;padding:5px 10px;border:0.5px solid var(--border-strong);border-radius:999px;background:var(--surface-1);color:var(--text-secondary);font-size:11px;text-decoration:none;}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.goal-tag{border:0.5px solid var(--border-strong);border-radius:999px;padding:6px 12px;font-size:12px;background:var(--surface-1);color:var(--text-secondary);}
+.steps-row{display:flex;justify-content:space-between;gap:6px;}
+.step{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--text-secondary);flex:1;}
+.plain-list{list-style:none;padding:0;margin:0;font-size:13px;color:var(--text-secondary);}
+.plain-list li{padding:4px 0;display:flex;gap:6px;align-items:center;}
+.plain-list.locked li{color:var(--text-muted);}
+.card{border:0.5px solid var(--border);border-radius:12px;padding:12px;background:var(--surface-1);}
+.card.small{font-size:12px;display:flex;gap:6px;align-items:center;}
+.edu-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px;}
+.device.desktop .edu-grid{grid-template-columns:repeat(3,1fr);}
+.offer-card{margin-top:14px;background:var(--surface-2);border:0.5px solid var(--border-strong);}
+.cta{display:block;width:100%;box-sizing:border-box;background:var(--fill-primary);color:var(--on-primary);border:none;border-radius:var(--radius);padding:16px 18px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;}
+.cta.ghost{background:transparent;color:var(--text-primary);border:1px solid var(--border-strong);font-weight:500;}
+.cta.inline{display:inline-block;width:auto;padding:5px 12px;font-size:11px;font-weight:500;}
+.faq{border-top:0.5px solid var(--border);}
+.faq-q{padding:10px 0;font-size:13px;display:flex;justify-content:space-between;cursor:pointer;}
+.faq-a{display:none;font-size:12px;color:var(--text-secondary);padding-bottom:10px;}
+.option{border:0.5px solid var(--border-strong);border-radius:var(--radius);padding:10px 12px;font-size:13px;margin-top:8px;cursor:pointer;user-select:none;transition:border-color .1s;}
+.option.selected{border:2px solid var(--text-primary);padding:9px 11px;}
+.option:hover{border-color:var(--text-secondary);}
+.check-line{cursor:pointer;user-select:none;font-size:12px;color:var(--text-secondary);margin-top:10px;}
+.check-line.checked{color:var(--text-primary);font-weight:500;}
+.input-wf{display:block;width:100%;border:0.5px dashed var(--border-strong);border-radius:var(--radius);background:var(--surface-2);font-family:inherit;font-size:12px;padding:10px;resize:vertical;color:var(--text-primary);}
+.input-wf::placeholder{color:var(--text-muted);}
+.progress{height:4px;background:var(--surface-1);border-radius:4px;margin:10px 0;overflow:hidden;}
+.progress span{display:block;height:100%;background:var(--text-primary);}
+.timeline{margin-top:12px;}
+.tl-item{display:flex;gap:10px;padding:8px 0;border-left:2px solid var(--border);margin-left:5px;padding-left:14px;}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--border-strong);margin-top:4px;margin-left:-19px;display:inline-block;}
+.tl-item.done .tl-dot{background:var(--text-primary);}
+.tabs{display:flex;gap:14px;border-bottom:0.5px solid var(--border);margin-bottom:10px;font-size:12px;color:var(--text-secondary);}
+.tab{padding-bottom:6px;}
+.tab.active{color:var(--text-primary);font-weight:500;border-bottom:2px solid var(--text-primary);}
+.chevron{cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 style="font-size:16px;">Vitalhealth — low-fi klikateľný prototyp</h1>
+  <p class="hint">Primárne mobil, sekundárne desktop. Texty a obsah sú ilustračné, nie finálne — farby a typografia prídu po dokončení brandingu (viď brief, sekcia 13).</p>
+
+  <div class="controls">
+    <div class="mode-toggle">
+      <button class="mode-btn active" data-mode="mobile">Mobil</button>
+      <button class="mode-btn" data-mode="desktop">Desktop</button>
+    </div>
+    <select id="screen-select">
+      <option value="home">1. Domov</option>
+      <option value="quiz1">2. Konfigurátor — krok 1/5</option>
+      <option value="quiz2">3. Konfigurátor — krok 2/5</option>
+      <option value="quiz3">4. Konfigurátor — krok 3/5</option>
+      <option value="goal">5. Konfigurátor — krok 4/5 (prečo)</option>
+      <option value="offer">6. Konfigurátor — krok 5/5 (výsledok a ponuka)</option>
+      <option value="checkout">7. Platba (Shopify checkout)</option>
+      <option value="orderconfirm">8. Potvrdenie objednávky</option>
+      <option value="onboarding">9. Harmonogram (protokol)</option>
+      <option value="dashboard">10. Klientska zóna</option>
+      <option value="shop">11. Obchod — katalóg</option>
+      <option value="product">12. Obchod — produkt</option>
+      <option value="cart">13. Košík</option>
+    </select>
+    <div style="display:flex;gap:8px;">
+      <button id="prev-btn" class="navbtn">← späť</button>
+      <button id="next-btn" class="navbtn">ďalej →</button>
+    </div>
+  </div>
+
+  <div class="center">
+  <div id="device" class="device mobile">
+    <div class="statusbar">9:41</div>
+    <div class="browserbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><div class="urlbar">vitalhealth.sk</div></div>
+    <div class="screen-root">
+
+      <div id="scr-home" class="screen">
+        <div class="topbar"><span style="font-weight:500;">vitalhealth</span><span class="mobile-only" onclick="toggleMenu()" style="cursor:pointer;">☰</span><nav class="navlinks"><a href="javascript:void(0)" onclick="go('quiz1')">Ciele</a><a href="javascript:void(0)">Ako to funguje</a><a href="javascript:void(0)">Diagnostika</a><a href="javascript:void(0)">Procedúry</a><a href="javascript:void(0)">O nás</a><a href="javascript:void(0)" onclick="go('shop')">Obchod</a></nav></div>
+        <div id="mobile-menu" class="mobile-menu">
+          <a href="javascript:void(0)" onclick="toggleMenu();go('quiz1')">Ciele</a>
+          <a href="javascript:void(0)">Ako to funguje</a>
+          <a href="javascript:void(0)">Diagnostika</a>
+          <a href="javascript:void(0)">Procedúry</a>
+          <a href="javascript:void(0)">O nás</a>
+          <a href="javascript:void(0)" onclick="toggleMenu();go('shop')">Obchod</a>
+        </div>
+        <div class="hero">
+          <div>
+            <h1 style="font-size:19px;margin:0 0 8px;">Zdravie, výkon a dlhovekosť z jedného miesta. Nie z desiatich rôznych.</h1>
+            <p class="sub">Vitalhealth prepája diagnostiku, personalizovaný protokol a overené procedúry do jedného systému, ktorý sa vyvíja s vami. Je to cesta k inštitútu funkčnej a preventívnej medicíny.</p>
+            <a href="#recenzie" class="rating-badge">★★★★★ Google recenzie</a>
+          </div>
+          <div class="wf-block" style="height:120px;">ilustrácia</div>
+        </div>
+        <button class="cta" style="margin:10px 0;" onclick="go('quiz1')">Vytvoriť môj protokol</button>
+        <p class="sub" style="margin:-6px 0 10px;font-size:11px;">Bez záväzku. Trvá menej ako 5 minút.</p>
+
+        <h3 style="margin:16px 0 4px;">Diagnostika a procedúry bežia cez overených partnerov</h3>
+        <p class="sub" style="margin:0 0 10px;">Každý partner prechádza výberom podľa presných kritérií, nie podľa toho, kto zaplatí za viditeľnosť.</p>
+        <div class="goal-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="wf-block" style="height:44px;margin:0;">Medirex</div>
+          <div class="wf-block" style="height:44px;margin:0;">Unilabs</div>
+          <div class="wf-block" style="height:44px;margin:0;">x-bionic sphere</div>
+          <div class="wf-block" style="height:44px;margin:0;">DNA ERA</div>
+          <div class="wf-block" style="height:44px;margin:0;">Pro Diagnostic Group</div>
+          <div class="wf-block" style="height:44px;margin:0;">Kompava</div>
+        </div>
+        <p class="sub" style="font-size:11px;margin-top:6px;">Logá sú ilustračné, nasadia sa až po zmluvnom potvrdení partnerstiev.</p>
+
+        <h3 style="margin:20px 0 8px;">Začnite pri tom, čo chcete zmeniť ako prvé.</h3>
+        <div class="tag-row">
+          <span class="goal-tag">Chudnutie</span>
+          <span class="goal-tag">Svaly a výkon</span>
+          <span class="goal-tag">Energia</span>
+          <span class="goal-tag">Spánok</span>
+          <span class="goal-tag">Mozgový výkon</span>
+          <span class="goal-tag">Mentálne zdravie</span>
+          <span class="goal-tag">Anti-age a dlhovekosť</span>
+          <span class="goal-tag">Hormóny</span>
+          <span class="goal-tag">Prevencia</span>
+        </div>
+        <button class="cta" style="margin-top:14px;" onclick="go('quiz1')">Spustiť môj konfigurátor</button>
+        <h3 style="margin:20px 0 8px;">Ako to funguje</h3>
+        <ul class="plain-list">
+          <li>📋 <b>Vyhodnotenie:</b> poviete nám svoj cieľ, životný štýl a obmedzenia. Žiadny dotazník na 50 strán.</li>
+          <li>📝 <b>Protokol:</b> dostanete konkrétny plán, čo jesť, ako sa hýbať a čo užívať, nie všeobecné rady.</li>
+          <li>🧪 <b>Diagnostika:</b> krvné testy a AI analýza spresnia plán podľa vašich reálnych dát.</li>
+          <li>📈 <b>Progres:</b> protokol sa mení podľa vašich výsledkov, nie podľa kalendára.</li>
+        </ul>
+        <h3 style="margin:20px 0 8px;">Čím nie sme</h3>
+        <ul class="plain-list">
+          <li>✕ Nemeriame biologický vek testami, ktoré si dnes protirečia</li>
+          <li>✕ Nepredávame doplnky s veľkými sľubmi a nulovými dôkazmi</li>
+          <li>✕ Nie sme ďalší e-shop s doplnkami</li>
+          <li>✕ Nie sme čakáreň. Prichádzate skôr, než niečo bolí</li>
+        </ul>
+        <h3 style="margin:20px 0 8px;">Prvý krok do vášho systému</h3>
+        <div class="card offer-card">
+          <p style="font-weight:500;margin:0 0 6px;">Vital baseline reset</p>
+          <ul class="plain-list" style="font-size:12px;">
+            <li>Diagnostický profil, 100+ biomarkerov</li>
+            <li>Konzultácia s lekárom</li>
+            <li>Prvá infúzna terapia</li>
+            <li>Kryo balík, box suplementov, aplikácia</li>
+          </ul>
+          <p style="font-size:13px;margin:8px 0;"><span style="color:var(--text-muted);text-decoration:line-through;">984 €</span> <span style="font-weight:500;">399 €</span></p>
+          <button class="cta" onclick="go('quiz1')">Zistiť môj plán</button>
+        </div>
+
+        <h3 style="margin:20px 0 4px;">Nástroje k tvojmu protokolu</h3>
+        <p class="sub" style="margin:0 0 10px;">Produkty si môžeš kúpiť aj samostatne, mimo konfigurátora — v protokole ich dostaneš navyše s presnou dávkou pre tvoj cieľ.</p>
+        <div class="edu-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:60px;width:100%;margin:0;">produkt</div>Sleep Mix — 29 €
+          </div>
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:60px;width:100%;margin:0;">produkt</div>Omega-3 — 24 €
+          </div>
+        </div>
+        <button class="cta ghost" style="margin-top:10px;" onclick="go('shop')">Prezrieť celý obchod</button>
+
+        <h3 id="recenzie" style="margin:20px 0 4px;">Výsledky, nie dojmy</h3>
+        <p class="sub" style="margin:0 0 10px;">Kým nezbierame dostatok reálnych recenzií, ukazujeme dáta: anonymizované zmeny biomarkerov, nie vymyslené hodnotenia.</p>
+        <div class="edu-grid">
+          <div class="wf-block" style="height:70px;margin:0;">pred/po: HbA1c</div>
+          <div class="wf-block" style="height:70px;margin:0;">pred/po: VO2 max</div>
+          <div class="wf-block" style="height:70px;margin:0;">★★★★★ recenzie (čoskoro)</div>
+        </div>
+        <p class="sub" style="font-size:11px;margin-top:6px;">Priestor pre videorecenzie pridávame po nazbieraní prvých klientskych skúseností (2. vlna).</p>
+
+        <h3 style="margin:20px 0 8px;">Časté otázky</h3>
+        <div class="faq"><div class="faq-q">Nie je to len marketing? <span>⌄</span></div><div class="faq-a">Protokol vychádza z klinicky overených biomarkerov, nie z trendov.</div></div>
+        <div class="faq"><div class="faq-q">Kto vyhodnocuje moje výsledky? <span>⌄</span></div><div class="faq-a">AI analýza pod podpisom lekára funkčnej medicíny.</div></div>
+        <div class="card" style="margin-top:16px;">🛡 Ak sa po 90 dňoch vaša biológia nepohne smerom k vášmu cieľu a protokol ste preukázateľne dodržali, prekalibrujeme ho zadarmo, vrátane nových testov.</div>
+        <p class="sub" style="font-size:11px;margin-top:8px;">Nevyčerpané procedúry alebo suplementy vám kedykoľvek vrátime v pomernej výške, bez pokút — alebo ich premeníme na kredit na ďalšie služby.</p>
+        <div class="card" style="margin-top:16px;background:var(--surface-1);">
+          <h3 style="margin:0 0 6px;">Toto je len začiatok.</h3>
+          <p class="sub">Vitalhealth dnes prepája protokol, diagnostiku a prvé procedúry. Postupne pribúdajú ďalšie vyšetrenia, partnerské pracoviská a vlastné kapacity. Cieľom je stať sa prvým skutočným inštitútom funkčnej a preventívnej medicíny na Slovensku a v Česku.</p>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3 style="margin:0 0 6px;">Ešte si nie ste istí?</h3>
+          <p class="sub" style="margin:0 0 10px;">Nechajte nám e-mail. Pošleme vám, ako presne protokol funguje, skôr než sa rozhodnete.</p>
+          <div class="wf-block" style="height:36px;margin-bottom:8px;">e-mail</div>
+          <button class="cta ghost">Chcem vedieť viac</button>
+        </div>
+        <button class="cta" style="margin-top:16px;" onclick="go('quiz1')">Som pripravený začať</button>
+        <p class="sub" style="margin-top:20px;font-size:11px;text-align:center;"><span style="text-decoration:underline;cursor:pointer;" onclick="go('shop')">Obchod</span> · O nás · Kontakt · Obchodné podmienky · Ochrana osobných údajov</p>
+      </div>
+
+      <div id="scr-quiz1" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('home')">←</span><span class="sub">Krok 1 z 5</span></div>
+        <div class="progress"><span style="width:20%;"></span></div>
+        <h2 style="font-size:18px;">Čo chcete zmeniť ako prvé?</h2>
+        <div class="option selected" onclick="selectSingle(this)">Chudnutie</div>
+        <div class="option" onclick="selectSingle(this)">Svaly a výkon</div>
+        <div class="option" onclick="selectSingle(this)">Energia</div>
+        <div class="option" onclick="selectSingle(this)">Spánok</div>
+        <div class="option" onclick="selectSingle(this)">Mozgový výkon</div>
+        <div class="option" onclick="selectSingle(this)">Mentálne zdravie</div>
+        <div class="option" onclick="selectSingle(this)">Anti-age a dlhovekosť</div>
+        <div class="option" onclick="selectSingle(this)">Hormóny</div>
+        <div class="option" onclick="selectSingle(this)">Prevencia</div>
+        <button class="cta" style="margin-top:16px;" onclick="go('quiz2')">Potvrdiť cieľ a pokračovať</button>
+      </div>
+
+      <div id="scr-quiz2" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('quiz1')">←</span><span class="sub">Krok 2 z 5</span></div>
+        <div class="progress"><span style="width:40%;"></span></div>
+        <h2 style="font-size:18px;">Tvoj životný štýl</h2>
+        <p class="sub" style="margin:0 0 4px;">Vyberte všetko, čo platí (dá sa zmeniť neskôr v profile).</p>
+        <div class="option selected" onclick="toggleCheck(this)">☑ Sedavé zamestnanie</div>
+        <div class="option" onclick="toggleCheck(this)">☐ Časté cestovanie</div>
+        <div class="option selected" onclick="toggleCheck(this)">☑ Nepravidelný spánok</div>
+        <div class="option" onclick="toggleCheck(this)">☐ Vysoký stres</div>
+        <button class="cta" style="margin-top:16px;" onclick="go('quiz3')">Pokračovať k obmedzeniam</button>
+      </div>
+
+      <div id="scr-quiz3" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('quiz2')">←</span><span class="sub">Krok 3 z 5</span></div>
+        <div class="progress"><span style="width:60%;"></span></div>
+        <h2 style="font-size:18px;">Zdravotné obmedzenia</h2>
+        <textarea class="input-wf" style="height:70px;" placeholder="Napríklad: lieky, alergie, obmedzenia pohybu, diagnostikované ochorenia..."></textarea>
+        <div class="check-line" onclick="toggleCheck(this)">☐ Súhlasím so spracovaním zdravotných údajov na účely personalizácie protokolu (samostatný súhlas, nie súčasť VOP)</div>
+        <button class="cta" style="margin-top:16px;" onclick="go('goal')">Pokračovať k vysvetleniu</button>
+      </div>
+
+      <div id="scr-goal" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('quiz3')">←</span><span class="sub">Krok 4 z 5</span></div>
+        <div class="progress"><span style="width:80%;"></span></div>
+        <div class="wf-block" style="height:140px;">ilustrácia</div>
+        <h1 style="font-size:19px;">Toto je možné dosiahnuť</h1>
+        <p class="sub">Výsledky vychádzajú zo zmeny metabolického zdravia, nie z hladovania.</p>
+        <h3 style="margin:16px 0 6px;">Prečo sa vám nedarí</h3>
+        <p class="sub">Krátke vysvetlenie mechanizmu — inzulínová citlivosť, spánok a zápal ovplyvňujú výsledok viac než kalórie samotné.</p>
+        <div class="edu-grid">
+          <div class="card small">▶ Inzulínová citlivosť</div>
+          <div class="card small">▶ Spánok a chudnutie</div>
+          <div class="card small">▶ Črevo a metabolizmus</div>
+        </div>
+        <button class="cta" style="margin-top:16px;" onclick="go('offer')">Zobraziť môj plán</button>
+      </div>
+
+      <div id="scr-offer" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('goal')">←</span><span class="sub">Krok 5 z 5</span></div>
+        <div class="progress"><span style="width:100%;"></span></div>
+        <h2 style="font-size:18px;">Tvoj protokol je pripravený</h2>
+        <p class="sub" style="margin:0 0 8px;">9 oblastí, každá s konkrétnymi krokmi pre tvoj cieľ:</p>
+        <ul class="plain-list locked" style="display:grid;grid-template-columns:1fr 1fr;gap:0 8px;">
+          <li>🔒 Výživa</li>
+          <li>🔒 Pohyb</li>
+          <li>🔒 Doplnky</li>
+          <li>🔒 Spánok</li>
+          <li>🔒 Omega-3 a tuky</li>
+          <li>🔒 Črevné zdravie</li>
+          <li>🔒 Bunkové zdravie</li>
+          <li>🔒 Toxíny</li>
+          <li>🔒 Stres a nervový systém</li>
+        </ul>
+        <div class="card offer-card">
+          <p style="font-weight:500;margin:0 0 6px;">Vital baseline reset</p>
+          <p style="font-size:13px;margin:8px 0;"><span style="color:var(--text-muted);text-decoration:line-through;">984 €</span> <span style="font-weight:500;">399 €</span></p>
+          <p class="sub" style="font-size:12px;">🛡 Garancia kvality procesu — viac v sekcii 8 briefu</p>
+          <button class="cta" onclick="checkoutSource='protocol';go('checkout')">Získať môj protokol</button>
+        </div>
+      </div>
+
+      <div id="scr-shop" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('home')">←</span><span class="sub">Obchod</span></div>
+        <h1 style="font-size:19px;">Nástroje k tvojmu protokolu</h1>
+        <p class="sub">Produkty si môžeš kúpiť aj samostatne. V rámci protokolu ich odporúčame priamo pre tvoj cieľ, s presnou dávkou a časovaním.</p>
+        <div class="edu-grid" style="margin-top:12px;grid-template-columns:1fr 1fr;">
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:70px;width:100%;margin:0;">produkt</div>Sleep Mix — 29 €
+          </div>
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:70px;width:100%;margin:0;">produkt</div>Omega-3 — 24 €
+          </div>
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:70px;width:100%;margin:0;">produkt</div>Denný multivitamín — 19 €
+          </div>
+          <div class="card small" style="flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;" onclick="go('product')">
+            <div class="wf-block" style="height:70px;width:100%;margin:0;">produkt</div>Probiotiká — 22 €
+          </div>
+        </div>
+      </div>
+
+      <div id="scr-product" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('shop')">←</span><span class="sub">Obchod / Sleep Mix</span></div>
+        <div class="wf-block" style="height:140px;">produkt</div>
+        <h1 style="font-size:19px;">Sleep Mix</h1>
+        <p class="sub">Horčík, L-theanín a glycín na podporu hlbokého spánku.</p>
+        <p style="font-weight:500;margin:10px 0;">29 €</p>
+        <button class="cta" onclick="go('cart')">Pridať do košíka</button>
+        <p class="sub" style="margin-top:10px;font-size:11px;">Presnú dávku a časovanie tohto produktu určí tvoj personalizovaný protokol — v klientskej zóne ho nájdeš rovno pri odporúčanom cieli.</p>
+      </div>
+
+      <div id="scr-cart" class="screen" style="display:none;">
+        <div class="topbar"><span class="chevron" onclick="go('shop')">←</span><span class="sub">Košík</span></div>
+        <h1 style="font-size:19px;">Tvoj košík</h1>
+        <div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;"><span>Sleep Mix × 1</span><span>29 €</span></div>
+        <div class="card" style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-weight:500;"><span>Spolu</span><span>29 €</span></div>
+        <button class="cta" style="margin-top:16px;" onclick="checkoutSource='shop';go('checkout')">Prejsť k platbe</button>
+      </div>
+
+      <div id="scr-checkout" class="screen" style="display:none;">
+        <div class="topbar"><span class="sub">Platba</span></div>
+        <div class="wf-block" style="height:220px;">natívny Shopify checkout (Stripe)</div>
+        <p class="sub" style="margin-top:10px;">Tento krok spravuje priamo Shopify — vzhľad a polia platobnej brány nie sú súčasťou tohto návrhu.</p>
+        <button class="cta" style="margin-top:16px;" onclick="go('orderconfirm')">Simulovať dokončenie platby</button>
+      </div>
+
+      <div id="scr-orderconfirm" class="screen" style="display:none;">
+        <div class="topbar"><span style="font-weight:500;">vitalhealth</span></div>
+        <div style="text-align:center;margin:16px 0;"><span style="font-size:28px;">✓</span><h2 style="font-size:18px;margin:8px 0 0;">Objednávka potvrdená</h2></div>
+        <p class="sub" style="text-align:center;">Potvrdenie príde aj e-mailom (natívna Shopify stránka).</p>
+        <button class="cta" style="margin-top:16px;" onclick="go(checkoutSource==='protocol'?'onboarding':'home')">Pokračovať</button>
+      </div>
+
+      <div id="scr-onboarding" class="screen" style="display:none;">
+        <div class="topbar"><span style="font-weight:500;">vitalhealth</span></div>
+        <div style="text-align:center;margin:12px 0;"><span style="font-size:28px;">✓</span><h2 style="font-size:18px;margin:8px 0 0;">Vitajte vo vitalhealth</h2></div>
+        <div class="timeline">
+          <div class="tl-item done"><span class="tl-dot"></span><div><p style="margin:0;font-weight:500;">Do 24 hodín</p><p class="sub" style="margin:0;">Prístup do klientskej zóny, rezervácia odberu</p></div></div>
+          <div class="tl-item"><span class="tl-dot"></span><div><p style="margin:0;font-weight:500;">Do 72 hodín</p><p class="sub" style="margin:0;">Prvá kryoterapia</p></div></div>
+          <div class="tl-item"><span class="tl-dot"></span><div><p style="margin:0;font-weight:500;">Do 7 dní</p><p class="sub" style="margin:0;">Výsledky a vizuálny report</p></div></div>
+          <div class="tl-item"><span class="tl-dot"></span><div><p style="margin:0;font-weight:500;">Do 10 dní</p><p class="sub" style="margin:0;">Box suplementov, prvá iv terapia</p></div></div>
+        </div>
+        <p class="sub" style="font-size:11px;margin-top:10px;">Termíny platia pre Bratislavský a Trnavský kraj, kde máme partnerov s okamžitou kapacitou. Mimo tohto regiónu vám presný termín potvrdíme individuálne.</p>
+        <button class="cta" style="margin-top:16px;" onclick="go('dashboard')">Prejsť do klientskej zóny</button>
+      </div>
+
+      <div id="scr-dashboard" class="screen" style="display:none;">
+        <div class="topbar"><span style="font-weight:500;">vitalhealth</span><span>👤</span></div>
+        <div class="tabs"><span class="tab active">Protokol</span><span class="tab">Diagnostika</span><span class="tab">Procedúry</span><span class="tab">Produkty</span></div>
+        <div class="wf-block" style="height:90px;">graf progresu</div>
+        <h3 style="margin:14px 0 6px;">Dnešné úlohy</h3>
+        <div class="option">☑ Výživa — raňajky s vysokým proteínom</div>
+        <div class="option">☐ Pohyb — 30 min chôdza</div>
+        <div class="option">☐ Doplnky — večerná dávka</div>
+        <div class="card small" style="margin-top:12px;">🛍 Odporúčané pre tvoj cieľ: sleep mix</div>
+        <div class="card small" style="margin-top:8px;color:var(--text-muted);">Procedúry — čoskoro dostupné <button class="cta ghost inline" style="margin-left:6px;">Zapísať sa na waitlist</button></div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+var screens=['home','quiz1','quiz2','quiz3','goal','offer','checkout','orderconfirm','onboarding','dashboard','shop','product','cart'];
+var idx=0;
+var checkoutSource='protocol';
+function render(){
+  screens.forEach(function(s,i){document.getElementById('scr-'+s).style.display=(i===idx)?'block':'none';});
+  document.getElementById('screen-select').value=screens[idx];
+  var menu=document.getElementById('mobile-menu');
+  if(menu){menu.classList.remove('open');}
+}
+function go(id){idx=screens.indexOf(id);render();}
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+function selectSingle(el){
+  var group=el.parentElement.querySelectorAll('.option');
+  group.forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+}
+function toggleCheck(el){
+  var sym=el.textContent.charAt(0);
+  var rest=el.textContent.slice(1);
+  var checked=(sym!=='☑');
+  el.textContent=(checked?'☑':'☐')+rest;
+  if(el.classList.contains('option')){el.classList.toggle('selected',checked);}
+  else{el.classList.toggle('checked',checked);}
+}
+document.getElementById('screen-select').addEventListener('change',function(e){idx=screens.indexOf(e.target.value);render();});
+document.getElementById('next-btn').addEventListener('click',function(){idx=Math.min(idx+1,screens.length-1);render();});
+document.getElementById('prev-btn').addEventListener('click',function(){idx=Math.max(idx-1,0);render();});
+document.querySelectorAll('.mode-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.mode-btn').forEach(function(x){x.classList.remove('active');});
+    b.classList.add('active');
+    document.getElementById('device').className='device '+b.dataset.mode;
+  });
+});
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var a=q.nextElementSibling;
+    a.style.display=(a.style.display==='block')?'none':'block';
+  });
+});
+render();
+</script>
+</body>
+</html>

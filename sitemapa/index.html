@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>Vitalhealth — sitemapa a flow</title>
+<style>
+  :root{
+    --bg:#f7f6f3;
+    --surface:#ffffff;
+    --accent-bg:#eef4fb;
+    --border:#e1ded6;
+    --text:#1f1e1c;
+    --text-secondary:#6b6a65;
+    --text-muted:#9a988f;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    padding:40px 16px 80px;
+  }
+  h1{
+    text-align:center;
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .subtitle{
+    text-align:center;
+    color:var(--text-secondary);
+    font-size:13px;
+    margin:0 0 28px;
+  }
+  .wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .legend{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:center;
+    font-size:11px;
+    color:var(--text-muted);
+  }
+  .chips{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .chip{
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:4px 10px;
+    font-size:12px;
+    color:var(--text-secondary);
+    background:var(--surface);
+    white-space:nowrap;
+  }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px 16px;
+    width:100%;
+    box-sizing:border-box;
+  }
+  .card.accent{ background:var(--accent-bg); }
+  .card-title{
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  .card-sub{
+    color:var(--text-secondary);
+    font-size:12px;
+    line-height:1.6;
+  }
+  .arrow{
+    color:var(--text-muted);
+    font-size:18px;
+    line-height:1;
+  }
+  .note{
+    font-size:11px;
+    color:var(--text-muted);
+    text-align:center;
+    max-width:420px;
+  }
+  .branches{
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:flex-start;
+    width:100%;
+  }
+  .col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    width:280px;
+  }
+  .col.narrow{ width:240px; }
+  .col-title{
+    font-weight:600;
+    font-size:14px;
+  }
+  @media (max-width:640px){
+    .col, .col.narrow{ width:100%; max-width:340px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Vitalhealth — sitemapa a flow</h1>
+<p class="subtitle">Domovská stránka + hlavný money-making flow + vedľajšia vetva obchodu</p>
+
+<div class="wrap">
+
+  <div class="legend">
+    <span>● reálne klikateľné v low-fi prototype</span>
+    <span>○ placeholder, obrazovka zatiaľ nepostavená</span>
+  </div>
+
+  <div class="chips">
+    <span class="chip">Ciele ●</span>
+    <span class="chip">Ako to funguje ○</span>
+    <span class="chip">Diagnostika ○</span>
+    <span class="chip">Procedúry ○</span>
+    <span class="chip">O nás / Veda ○</span>
+    <span class="chip">Obchod ●</span>
+  </div>
+
+  <div class="arrow">↓</div>
+
+  <div class="card accent" style="max-width:420px">
+    <div class="card-title">Domov</div>
+    <div class="card-sub">
+      1. Hero — veta + badge Google recenzií + CTA<br>
+      2. Partneri — logá overených pracovísk<br>
+      3. Vyberte cieľ — 9 tagov (neklikateľné) + CTA do konfigurátora<br>
+      4. Ako to funguje — 4 kroky systému<br>
+      5. Čím nie sme — anti-hype positioning<br>
+      6. Vstupná ponuka — teaser Baseline Reset + CTA<br>
+      7. Nástroje k protokolu — 2 produkty + odkaz do obchodu<br>
+      8. Recenzie a dôvera — dáta pred/po namiesto testimoniálov<br>
+      9. FAQ — zo zdrojov skepsy zákazníka<br>
+      10. Garancia — podmienená + flexibilita vrátenia<br>
+      11. Naša vízia — ekosystém → inštitút<br>
+      12. Finálne CTA — primárne + sekundárny e-mail zber<br>
+      13. Pätička — Obchod / O nás / Kontakt / právne
+    </div>
+  </div>
+
+  <div class="arrow">↓</div>
+  <div class="note">hero CTA, "Ciele" v menu aj externá kampaň vedú vždy rovno do konfigurátora, krok 1</div>
+
+  <div class="branches">
+
+    <div class="col">
+      <div class="col-title">Hlavný flow (protokol)</div>
+
+      <div class="card">
+        <div class="card-title">Konfigurátor — 5 krokov</div>
+        <div class="card-sub">
+          1. Cieľ (single-select, 9 možností)<br>
+          2. Životný štýl (checkboxy)<br>
+          3. Obmedzenia + súhlas GDPR čl. 9<br>
+          4. "Prečo" — edukácia (dynamická podľa cieľa)<br>
+          5. Výsledok — 9 oblastí protokolu + ponuka 399 €
+        </div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Platba</div>
+        <div class="card-sub">natívny Shopify checkout, brána Stripe</div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Potvrdenie objednávky</div>
+        <div class="card-sub">natívna Shopify stránka — kúpil protokol ↓ pokračuje, kúpil len produkt → späť na Domov</div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Harmonogram (onboarding)</div>
+        <div class="card-sub">24h prístup a odber · 72h kryoterapia · 7 dní výsledky · 10 dní box a IV terapia (geo poznámka BA/TT kraj)</div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Klientska zóna</div>
+        <div class="card-sub">taby: Protokol · Diagnostika · Procedúry (waitlist) · Produkty</div>
+      </div>
+    </div>
+
+    <div class="col narrow">
+      <div class="col-title">Vedľajšia vetva: Obchod</div>
+
+      <div class="card">
+        <div class="card-title">Katalóg</div>
+        <div class="card-sub">zoznam produktov, vstup z hlavičky (aj mobil) a homepage sekcie 7</div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Produkt</div>
+        <div class="card-sub">detail produktu, napr. Sleep Mix</div>
+      </div>
+      <div class="arrow">↓</div>
+
+      <div class="card">
+        <div class="card-title">Košík</div>
+        <div class="card-sub">→ zdieľaná Platba a Potvrdenie s hlavným flow, bez onboardingu</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
