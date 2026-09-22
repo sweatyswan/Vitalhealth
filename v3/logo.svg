@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="738.001" height="189.64" viewBox="0 0 738.001 189.64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 2402">
+<path id="Union" d="M311.798 142.412L357.227 30.5431H370.336L317.544 158.034H306.052L253.08 30.5431H266.188L311.798 142.412ZM401.17 158.034H388.599V30.5431H401.17V158.034ZM523.641 41.6759H478.212V158.034H465.642V41.6759H420.213V30.5431H523.641V41.6759ZM633.532 158.034H620.245L600.851 108.295L575.174 45.2677L549.137 108.295L530.103 158.034H516.636L569.967 30.5431H580.56L633.532 158.034ZM664.38 146.9H738.001V158.034H651.81V30.5431H664.38V146.9Z" fill="white"/>
+<circle id="Ellipse 211" cx="94.8201" cy="94.8201" r="88.4988" stroke="url(#paint0_linear_0_4)" stroke-width="12.6427"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="94.8201" y1="0" x2="94.8201" y2="189.64" gradientUnits="userSpaceOnUse">
+<stop stop-color="#00FFFB"/>
+<stop offset="0.43" stop-color="#01B8BC"/>
+<stop offset="0.87" stop-color="#2A7CE9"/>
+</linearGradient>
+</defs>
+</svg>
