@@ -459,15 +459,19 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .kr-tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
 .kr-tabs button.on .ic{background:color-mix(in srgb, #fff 24%, transparent);color:#fff;}
 .kr-tabs button.on small{color:rgba(255,255,255,.86);}
-.kcard{display:flex;align-items:center;gap:12px;padding:8px 12px 8px 8px;border-radius:16px;cursor:pointer;margin-bottom:8px;}
-.kcard .ph{width:108px;height:84px;border-radius:12px;overflow:hidden;flex:none;position:relative;background:var(--ink-08);}
-.kcard .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+.kcard{display:flex;align-items:stretch;gap:12px;padding:8px 12px 8px 8px;border-radius:16px;cursor:pointer;margin-bottom:8px;}
+.kcard .ph{width:108px;min-height:84px;border-radius:12px;overflow:hidden;flex:none;position:relative;background:var(--ink-08);}
+.kcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .kcard .n{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:var(--t-micro);font-weight:var(--w-bold);background:var(--accent);color:#fff;font-variant-numeric:tabular-nums;}
 .kcard .tt{flex:1;min-width:0;}
 .kcard .ar{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--accent);}
 .kcard .nm{font-size:var(--t-meta);font-weight:var(--w-semibold);color:var(--text);margin-top:2px;line-height:var(--lh-snug);}
+.kcard .acts{margin:6px 0 0;padding:0;list-style:none;}
+.kcard .acts li{position:relative;padding-left:11px;font-size:var(--t-micro);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-snug);}
+.kcard .acts li+li{margin-top:3px;}
+.kcard .acts li::before{content:'';position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:currentColor;}
 .kcard .pr{display:none;}
-.kcard .side{display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;}
+.kcard .side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:none;}
 .kcard .cv{color:var(--text-3);display:flex;}
 .goals{display:flex;gap:8px;width:100%;}
 .goals.n-4{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;}
@@ -1375,9 +1379,10 @@ function renderGroups(){
 function stageRow(s){
   const lock=stageLocked(s);
   const src=AREA_COVER[s.area]||'';
+  const acts=(s.acts||[]).map(a=>`<li>${a.nm}</li>`).join('');
   return `<div class="kcard glass${s.done?' done':''}${lock?' lock':''}" id="st-${s.id}" onclick="openKrokSheet(${s.id})">
       <div class="ph">${src?`<img src="${src}" alt="">`:''}<span class="n">${stageNo(s)}</span></div>
-      <div class="tt"><div class="ar">${areaTitle(s.area)}</div><div class="nm">${s.nm}</div></div>
+      <div class="tt"><div class="ar">${areaTitle(s.area)}</div><div class="nm">${s.nm}</div>${acts?`<ul class="acts">${acts}</ul>`:''}</div>
       <div class="side">
         <span class="cv">${ICO.chr}</span>
         <span class="bx${s.done?' on':''}${lock?' lock':''}" onclick="event.stopPropagation();toggleStageDone(${s.id})" role="checkbox" aria-checked="${s.done?'true':'false'}" aria-label="Splniť krok">${s.done?ICO.check:''}</span>
