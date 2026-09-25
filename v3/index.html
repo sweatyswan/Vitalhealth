@@ -368,10 +368,12 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .sh-acc .abody{padding:0 14px 14px;border-top:1px solid var(--sh-div);}
 .sh-acc .abody p{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);margin:10px 0 0;}
 .tip-block{position:relative;margin-top:10px;padding:12px;border-radius:14px;border:1px solid var(--sh-div);background:var(--ink-08);overflow:hidden;}
-.tip-block.has-photo{min-height:132px;}
-.tip-block.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:scale(1.9);transform-origin:var(--pos,62% 42%);display:block;z-index:0;}
-.tip-block.has-photo .hd,.tip-block.has-photo ul{position:relative;z-index:1;}
-.tip-block.has-photo ul{max-width:70%;}
+.tip-block.has-photo{padding:0;background:var(--sh-card);}
+.tip-block.has-photo .tip-face{position:relative;min-height:132px;padding:12px;}
+.tip-block.has-photo .tip-bg{position:absolute;inset:0;overflow:hidden;z-index:0;}
+.tip-block.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:scale(1.9);transform-origin:var(--pos,62% 42%);display:block;}
+.tip-block.has-photo .hd,.tip-block.has-photo ul,.tip-block.has-photo .tip-more-btn{position:relative;z-index:1;}
+.tip-block.has-photo ul,.tip-block.has-photo .tip-more-btn{max-width:70%;}
 .tip-block.has-photo .tt,.tip-block.has-photo li{color:var(--text);}
 .tip-block.has-photo .pill{color:var(--ok);background:var(--bg);}
 .tip-block .hd{display:flex;align-items:center;gap:8px;}
@@ -381,6 +383,10 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .tip-block ul{margin:8px 0 0;padding:0;list-style:none;}
 .tip-block li{display:flex;gap:6px;align-items:flex-start;font-size:var(--t-micro);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-snug);margin-top:4px;}
 .tip-block li svg{flex:none;margin-top:1px;color:var(--ok);}
+.tip-block .tip-more-btn{margin-top:8px;display:inline-flex;}
+.tip-block .tip-extra{display:none;position:relative;z-index:1;padding:12px 14px 14px;background:var(--sheet-bg);border-top:1px solid var(--sh-div);}
+.tip-block.is-open .tip-extra{display:block;}
+.tip-block .tip-extra p{margin:0;font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);}
 .tip-acts{display:flex;gap:8px;margin-top:12px;}
 .tip-acts .cta{flex:1;margin:0;padding:11px 10px;font-size:var(--t-micro);display:flex;align-items:center;justify-content:center;gap:6px;}
 .sh-acc.lock summary{opacity:.55;}
@@ -1405,11 +1411,20 @@ function stageRow(s, from){
     </div>`;
 }
 function shRow(s){ return stageRow(s,'area'); }
-function tipBlock(icon,title,pill,points,photo,pos){
+function toggleTipMore(btn){
+  const block=btn.closest('.tip-block');
+  const open=block.classList.toggle('is-open');
+  btn.textContent=open?'Menej':'Zistiť viac';
+  btn.setAttribute('aria-expanded',open?'true':'false');
+}
+function tipBlock(icon,title,pill,points,photo,pos,more){
   const bg=photo?' has-photo':'';
   const img=photo?`<img class="ph" alt="" style="--pos:${pos||'center'}" src="${photo}">`:'';
-  return `<div class="tip-block${bg}">${img}${photo?'<span class="photo-veil"></span>':''}<div class="hd"><span class="ic">${ic(icon,16)}</span><span class="tt">${title}</span><span class="pill">${pill}</span></div>
-    <ul>${points.map(p=>`<li>${ic('check',14)}<span>${p}</span></li>`).join('')}</ul></div>`;
+  const cta=more?`<button type="button" class="lnk st-more tip-more-btn" aria-expanded="false" onclick="toggleTipMore(this)">Zistiť viac</button>`:'';
+  const extra=more?`<div class="tip-extra">${more}</div>`:'';
+  const bgWrap=photo?`<div class="tip-bg">${img}<span class="photo-veil"></span></div>`:'';
+  return `<div class="tip-block${bg}"><div class="tip-face">${bgWrap}<div class="hd"><span class="ic">${ic(icon,16)}</span><span class="tt">${title}</span><span class="pill">${pill}</span></div>
+    <ul>${points.map(p=>`<li>${ic('check',14)}<span>${p}</span></li>`).join('')}</ul>${cta}</div>${extra}</div>`;
 }
 function pohybStrengthBody(){
   return `<p>Buduj svaly, zvyšuj silu a podpor svoj metabolizmus.</p>
@@ -1418,17 +1433,20 @@ function pohybStrengthBody(){
       '45 až 60 minút na tréning',
       'Celé telo, spočiatku',
       'Plán sedí na tvoju úroveň, čas a vybavenie'
-    ],'covers/sportovec.jpg','center 40%')}
+    ],'covers/sportovec.jpg','center 40%',
+      '<p>Cieľ je nabrať svaly, preto 3 tréningy týždenne po 45 až 60 minút. Začni celým telom. Plán sedí na tvoju úroveň, čas a vybavenie.</p>')}
     ${tipBlock('activity','Ako trénovať','blízko zlyhania',[
       'Postupne zvyšuj váhu, opakovania a náročnosť cvikov',
       'Sila a svalová hmota sa trénujú inak, podľa cieľa',
       'Intenzita je dôležitejšia než extrémne váhy'
-    ],'covers/pohyb.jpg','32% 45%')}
+    ],'covers/pohyb.jpg','32% 45%',
+      '<p>Postupne zvyšuj váhu, opakovania a náročnosť cvikov. Sila a svalová hmota sa trénujú inak, podľa cieľa. Intenzita je dôležitejšia než extrémne váhy.</p>')}
     ${tipBlock('shield','Technika a regenerácia','dlhodobo',[
       'Stroje aj voľné váhy budujú svaly rovnako dobre',
       'Spánok, stres, kĺby a šľachy rozhodujú, či vydržíš',
       'Myostatín, regenerácia, longevity a ďalšie témy'
-    ],'covers/sportovec.jpg','68% 55%')}`;
+    ],'covers/sportovec.jpg','68% 55%',
+      '<p>Stroje aj voľné váhy budujú svaly rovnako dobre. Spánok, stres, kĺby a šľachy rozhodujú, či vydržíš. Ďalšie témy: myostatín, regenerácia, longevity.</p>')}`;
 }
 function spanokRhythmBody(){
   return `<p>Správne načasovanie a dĺžka spánku podporujú regeneráciu mozgu, hormónov aj energie. Hlavné odporúčania v skratke.</p>
@@ -1436,20 +1454,22 @@ function spanokRhythmBody(){
       'Ideálne 7,5 až 8,5 hodín denne',
       'Jeden cyklus trvá asi 90 minút',
       'Hlboký a REM spánok zlepšujú regeneráciu aj výkon'
-    ],'covers/spanok.jpg','left center')}
+    ],'covers/spanok.jpg','left center',
+      '<p>Pri tvojom profile mierime na spánkové okno 7,5 až 8 hodín. Pravidelnosť je dôležitejšia než celkový počet hodín, preto začíname ňou.</p>')}
     ${tipBlock('clock','Kedy zaspávať','22:00 až 23:30',[
       'Ideálne okno 22:00 až 23:30',
       'Najviac hlbokého spánku je v prvej polovici noci',
       'Cirkadiánny rytmus beží v 24-hodinovom cykle'
-    ],'covers/spanok.jpg','left 70%')}
+    ],'covers/spanok.jpg','left 70%',
+      '<p>Vyber si čas budenia a drž ho aj cez víkend, plus mínus 30 minút. Telo si podľa neho nastaví aj čas, kedy začne byť únava.</p>')}
     ${tipBlock('moon','Poobedný spánok','10 až 25 min',[
       'Krátky spánok 10 až 25 minút',
       'Zlepšuje pozornosť a výkon',
       'Dlhší ako 30 až 60 minút môže narušiť nočný spánok'
-    ],'covers/stres.jpg','left bottom')}
+    ],'covers/stres.jpg','left bottom',
+      '<p>Krátky spánok 10 až 25 minút zlepšuje pozornosť a výkon. Dlhší ako 30 až 60 minút môže narušiť nočný spánok.</p>')}
     <div class="tip-acts">
       <button type="button" class="cta" onclick="openSheet('video')">${ic('play',14)} 2 min video</button>
-      <button type="button" class="cta ghost" onclick="openSheet('video')">${ic('info',14)} Zistiť viac</button>
     </div>`;
 }
 function actIcon(s,i){
