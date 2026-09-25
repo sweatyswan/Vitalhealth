@@ -58,6 +58,7 @@
   --sh-card:rgba(255,255,255,.88); --sh-div:rgba(1,10,35,.08);
   --cta-ghost-fill:color-mix(in srgb, var(--accent) 10%, #fff);
   --cta-ghost-line:color-mix(in srgb, var(--accent) 72%, var(--bg));
+  --cta-fill:#1E6AD8;
 }
 .themed.dark{
   --accent:#2A7CE9; --cy:#00FFFB; --cy-soft:#01B8BC; --ok:#2ee69b;
@@ -73,6 +74,7 @@
   --sh-card:rgba(255,255,255,.08); --sh-div:rgba(255,255,255,.1);
   --cta-ghost-fill:color-mix(in srgb, var(--accent) 16%, transparent);
   --cta-ghost-line:var(--accent);
+  --cta-fill:#2773D9;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
@@ -191,7 +193,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .tiles{display:flex;flex-direction:column;gap:8px;}
 .tile{display:flex;align-items:center;gap:12px;border-radius:16px;padding:13px 14px;cursor:pointer;}
 .tile.glass::after{background:linear-gradient(155deg,var(--g-rim-hi),transparent 30%,transparent 58%,color-mix(in srgb, var(--accent) 55%, transparent));}
-.tile .n{width:26px;height:26px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-size:var(--t-meta);font-weight:var(--w-bold);background:var(--accent);color:#fff;font-variant-numeric:tabular-nums;}
+.tile .n{width:26px;height:26px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-size:var(--t-meta);font-weight:var(--w-bold);background:var(--cta-fill);color:#fff;font-variant-numeric:tabular-nums;}
 .tile-ic{width:48px;height:48px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb, var(--accent) 16%, transparent);color:var(--accent);}
 .tile-ic svg{display:block;}
 .herocard{display:flex;align-items:flex-end;gap:14px;}
@@ -241,7 +243,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .krok-act[open] summary .cv{transform:rotate(180deg);}
 .krok-act p{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);margin:0 0 12px;}
 .krok-act.lock summary{color:var(--text-3);}
-.krok-act .lk{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text-3);margin:0 0 12px;display:block;line-height:var(--lh-snug);}
+.krok-act .lk{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--accent);margin:0 0 12px;display:inline-flex;line-height:var(--lh-snug);text-decoration:underline;text-underline-offset:2px;}
 
 /* ---------- calendar ---------- */
 .cal-wk{display:flex;justify-content:space-between;gap:3px;}
@@ -281,7 +283,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .prod .nm{font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
 .prod .ds{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);margin-top:2px;font-variant-numeric:tabular-nums;}
 .prod .wh{font-size:var(--t-micro);font-weight:var(--w-regular);color:var(--text-3);margin-top:3px;line-height:var(--lh-snug);}
-.buy{flex:none;font-size:var(--t-meta);font-weight:var(--w-semibold);color:#fff;background:var(--accent);border:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--fb);}
+.buy{flex:none;font-size:var(--t-meta);font-weight:var(--w-semibold);color:#fff;background:var(--cta-fill);border:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-family:var(--fb);}
 .buy.soon{background:var(--ink-08);color:var(--text-3);cursor:default;}
 
 /* ---------- profil ---------- */
@@ -295,7 +297,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .locked .ic{width:34px;height:34px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--ink-08);color:var(--text-3);}
 
 /* ---------- shared controls ---------- */
-.cta{display:block;width:100%;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:13px;font-size:var(--t-body);font-weight:var(--w-semibold);cursor:pointer;font-family:var(--fb);text-align:center;}
+.cta{display:block;width:100%;background:var(--cta-fill);color:#fff;border:none;border-radius:999px;padding:13px;font-size:var(--t-body);font-weight:var(--w-semibold);cursor:pointer;font-family:var(--fb);text-align:center;}
 .cta.ghost{background:var(--cta-ghost-fill);border:1.5px solid var(--cta-ghost-line);color:var(--accent);display:flex;align-items:center;justify-content:center;gap:4px;padding:12px;}
 .overlay{position:absolute;inset:0;z-index:120;background:var(--overlay);backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px) saturate(1.1);display:flex;align-items:flex-end;}
 .sheet{position:relative;width:100%;background:var(--sheet-bg);border-radius:26px 26px 0 0;padding:10px 20px 28px;max-height:90%;overflow-y:auto;}
@@ -307,10 +309,10 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .sheet.has-cover .grab{position:relative;z-index:5;background:rgba(255,255,255,.62);box-shadow:0 0 0 1px rgba(11,23,53,.14),0 1px 4px rgba(11,23,53,.16);}
 .sheet.has-cover .close,.sheet.has-cover .back{z-index:6;background:rgba(255,255,255,.8);color:#0b1735;backdrop-filter:blur(12px) saturate(1.2);-webkit-backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 1px 6px rgba(11,23,53,.16),inset 0 1px 0 rgba(255,255,255,.9);}
 .sheet.has-cover .sh-hero{padding-right:0;}
-.sheet h3{font-size:var(--t-stat);font-weight:var(--w-bold);letter-spacing:var(--ls-tight);}
+.sheet h3{font-size:var(--t-stat);font-weight:var(--w-bold);letter-spacing:var(--ls-tight);margin:0 0 14px;}
 .sheet p{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);}
 .badge-pill{display:inline-block;background:color-mix(in srgb, var(--accent) 12%, transparent);color:var(--accent);font-size:var(--t-micro);font-weight:var(--w-semibold);padding:5px 11px;border-radius:999px;margin-bottom:10px;box-shadow:inset 0 1px 0 var(--g-rim-hi);}
-.sh-hero{margin-bottom:14px;padding-right:36px;}
+.sh-hero{margin-bottom:16px;padding-right:36px;}
 .sh-hero .badge-pill{margin-bottom:8px;}
 .sh-hero h3{margin:0;}
 .sh-vs li:last-child{margin-bottom:0;}
@@ -364,6 +366,22 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .sh-acc[open] .cv{transform:rotate(180deg);}
 .sh-acc .abody{padding:0 14px 14px;border-top:1px solid var(--sh-div);}
 .sh-acc .abody p{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);margin:10px 0 0;}
+.tip-block{position:relative;margin-top:10px;padding:12px;border-radius:14px;border:1px solid var(--sh-div);background:var(--ink-08);overflow:hidden;}
+.tip-block.has-photo{min-height:132px;}
+.tip-block.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:scale(1.9);transform-origin:var(--pos,62% 42%);display:block;z-index:0;}
+.tip-block.has-photo .hd,.tip-block.has-photo ul{position:relative;z-index:1;}
+.tip-block.has-photo ul{max-width:70%;}
+.tip-block.has-photo .tt,.tip-block.has-photo li{color:var(--text);}
+.tip-block.has-photo .pill{color:var(--ok);background:var(--bg);}
+.tip-block .hd{display:flex;align-items:center;gap:8px;}
+.tip-block .ic{width:32px;height:32px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb, var(--accent) 14%, transparent);color:var(--accent);}
+.tip-block .tt{flex:1;min-width:0;font-size:var(--t-meta);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
+.tip-block .pill{flex:none;font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--ok);background:color-mix(in srgb, var(--ok) 14%, transparent);border-radius:999px;padding:4px 8px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.tip-block ul{margin:8px 0 0;padding:0;list-style:none;}
+.tip-block li{display:flex;gap:6px;align-items:flex-start;font-size:var(--t-micro);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-snug);margin-top:4px;}
+.tip-block li svg{flex:none;margin-top:1px;color:var(--ok);}
+.tip-acts{display:flex;gap:8px;margin-top:12px;}
+.tip-acts .cta{flex:1;margin:0;padding:11px 10px;font-size:var(--t-micro);display:flex;align-items:center;justify-content:center;gap:6px;}
 .sh-acc.lock summary{opacity:.55;}
 .sh-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--sh-div);cursor:pointer;}
 .sh-row:last-child{border-bottom:none;}
@@ -376,7 +394,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .sh-ylabs span{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text-3);background:var(--sheet-bg);padding:0 4px;border-radius:6px;font-variant-numeric:tabular-nums;}
 .sh-spark svg{display:block;width:100%;height:80px;}
 .sh-cover{position:relative;margin:-37px -20px 16px;height:var(--sh-cover-h);overflow:hidden;border-radius:26px 26px 0 0;background:var(--ink-08);}
-.sh-cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.sh-cover img{position:absolute;left:50%;top:50%;width:148%;height:148%;max-width:none;object-fit:cover;object-position:center 40%;transform:translate(-50%,-50%);display:block;}
 .sh-cover::after{content:'';position:absolute;inset:auto 0 0;height:72px;background:linear-gradient(to bottom,transparent,var(--sheet-bg));pointer-events:none;}
 
 .toastovl{position:absolute;inset:0;z-index:150;background:var(--overlay);display:flex;align-items:center;justify-content:center;padding:28px 22px;backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);}
@@ -456,13 +474,13 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .kr-tabs button > span:last-child{min-width:0;flex:1;}
 .kr-tabs button b{display:block;font-size:var(--t-micro);font-weight:var(--w-semibold);overflow-wrap:break-word;hyphens:auto;}
 .kr-tabs button small{display:block;font-size:var(--t-micro);font-weight:var(--w-regular);color:var(--text-3);overflow-wrap:break-word;hyphens:auto;}
-.kr-tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.kr-tabs button.on{background:var(--cta-fill);color:#fff;border-color:var(--cta-fill);}
 .kr-tabs button.on .ic{background:color-mix(in srgb, #fff 24%, transparent);color:#fff;}
-.kr-tabs button.on small{color:rgba(255,255,255,.86);}
+.kr-tabs button.on small{color:#fff;}
 .kcard{display:flex;align-items:stretch;gap:12px;padding:8px 12px 8px 8px;border-radius:16px;cursor:pointer;margin-bottom:8px;}
 .kcard .ph{width:108px;min-height:84px;border-radius:12px;overflow:hidden;flex:none;position:relative;background:var(--ink-08);}
 .kcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
-.kcard .n{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:var(--t-micro);font-weight:var(--w-bold);background:var(--accent);color:#fff;font-variant-numeric:tabular-nums;}
+.kcard .n{position:absolute;left:6px;top:6px;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:var(--t-micro);font-weight:var(--w-bold);background:var(--cta-fill);color:#fff;font-variant-numeric:tabular-nums;}
 .kcard .tt{flex:1;min-width:0;}
 .kcard .ar{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--accent);}
 .kcard .nm{font-size:var(--t-meta);font-weight:var(--w-semibold);color:var(--text);margin-top:2px;line-height:var(--lh-snug);}
@@ -471,8 +489,6 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .kcard .acts li+li{margin-top:3px;}
 .kcard .acts li::before{content:'';position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:currentColor;}
 .kcard .pr{display:none;}
-.kcard .side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:none;}
-.kcard .cv{color:var(--text-3);display:flex;}
 .goals{display:flex;gap:8px;width:100%;}
 .goals.n-4{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;}
 .goals.n-4::-webkit-scrollbar{display:none;}
@@ -482,7 +498,6 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .gcard img{width:100%;height:112px;object-fit:cover;display:block;}
 .goals.n-1 .gcard img{height:168px;}
 .goals.n-2 .gcard img{height:140px;}
-.gcard .nm{position:absolute;left:0;right:0;bottom:0;margin:0;padding:28px 8px 8px;font-size:var(--t-micro);font-weight:var(--w-semibold);color:#fff;line-height:var(--lh-snug);background:linear-gradient(to top,rgba(11,23,53,.78),transparent);}
 .goals-list{display:flex;flex-direction:column;gap:8px;}
 .goals-list .gcard{display:flex;align-items:center;background:var(--glass);}
 .goals-list .gcard img{width:88px;height:72px;flex:none;}
@@ -499,14 +514,20 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .vban b{display:block;font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
 .vban .sub{display:block;font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text-3);margin-top:2px;}
 .vban .cv{margin-left:auto;color:var(--text-3);flex:none;}
-.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 8px;}
-.area-card{display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%;border:none;padding:0;background:none;cursor:pointer;text-align:left;color:inherit;font-family:inherit;}
-.area-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block;}
-.area-card .nm{display:flex;align-items:center;justify-content:space-between;gap:2px;width:100%;margin-top:6px;font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
-.area-card .ct{font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text-3);margin-top:2px;}
+.vban.has-photo{position:relative;overflow:hidden;min-height:76px;padding:0;align-items:stretch;}
+.vban.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center;z-index:0;}
+.vban.has-photo .copy{position:relative;z-index:1;display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;}
+.vban.has-photo .tile-ic{width:36px;height:36px;border-radius:999px;background:var(--cta-fill);color:#fff;}
+.photo-veil{position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 94%,transparent) 32%,color-mix(in srgb,var(--bg) 62%,transparent) 52%,color-mix(in srgb,var(--bg) 16%,transparent) 72%,transparent 88%);}
+.photo-cap{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:6px;margin:0;padding:28px 10px 10px;font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);background:linear-gradient(to top,var(--bg),color-mix(in srgb,var(--bg) 72%,transparent) 55%,transparent);}
+.photo-cap svg{flex:none;color:var(--text);}
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.area-card{position:relative;display:block;width:100%;aspect-ratio:2/1;border:none;padding:0;background:var(--ink-08);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;color:inherit;font-family:inherit;}
+.area-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.area-card .nm.photo-cap,.goals .gcard .nm.photo-cap{position:absolute;left:0;right:0;bottom:0;}
 .seg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px;}
 .seg button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:var(--text-3);font-size:var(--t-micro);font-weight:var(--w-semibold);padding:10px 4px;cursor:pointer;font-family:var(--fb);line-height:var(--lh-snug);text-align:center;}
-.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.seg button.on{background:var(--cta-fill);color:#fff;border-color:var(--cta-fill);}
 .stack{display:flex;flex-direction:column;gap:8px;}
 .pcard{display:flex;align-items:center;gap:12px;width:100%;border:none;border-radius:16px;padding:10px 12px;cursor:pointer;text-align:left;color:inherit;font-family:inherit;}
 .pcard img,.pcard .ph{width:64px;height:64px;object-fit:contain;border-radius:12px;background:#fff;flex:none;}
@@ -525,6 +546,19 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .mcard .ds{display:block;font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);margin-top:2px;line-height:var(--lh-snug);}
 .mcard .ph{width:72px;height:52px;object-fit:cover;border-radius:10px;flex:none;}
 .mcard .cv{flex:none;color:var(--text-3);}
+#p-oblast .pagesub{margin:8px 0 16px;}
+#p-oblast .an-video{height:168px;margin:0 0 4px;}
+#p-oblast .sect{margin:20px 0 12px;}
+#p-oblast .mcard{padding:14px;margin:0 0 10px;gap:12px;}
+#p-oblast .mcard .ds{margin-top:6px;}
+#p-oblast .mcard .ic{width:36px;height:36px;}
+#p-oblast .mcard.has-photo{position:relative;overflow:hidden;min-height:84px;align-items:center;padding:12px 14px;}
+#p-oblast .mcard.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:scale(1.9);transform-origin:var(--pos,62% 42%);display:block;border-radius:0;z-index:0;}
+#p-oblast .mcard.has-photo .ic,#p-oblast .mcard.has-photo .tt{position:relative;z-index:1;}
+#p-oblast .mcard.has-photo .tt{max-width:56%;}
+#p-oblast .mcard.has-photo .ds{max-width:none;color:var(--text);}
+#p-oblast .mcard.has-photo .ic{background:color-mix(in srgb,var(--bg) 78%,transparent);}
+#p-oblast .mcard.has-photo .cv{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:1;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--bg) 82%,transparent);color:var(--text);}
 .subhd .lg{margin-left:4px;}
 #ov-status{display:grid;grid-template-columns:1fr 124px;padding:0;overflow:hidden;align-items:stretch;}
 #ov-status .an-copy{padding:16px 12px 16px 18px;display:flex;flex-direction:column;min-width:0;gap:8px;}
@@ -536,7 +570,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .prod-an b{display:block;font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
 .ci-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 14px;}
 .ci-tabs button{border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--text-3);font-size:var(--t-meta);font-weight:var(--w-semibold);padding:8px 6px;cursor:pointer;font-family:var(--fb);}
-.ci-tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.ci-tabs button.on{background:var(--cta-fill);color:#fff;border-color:var(--cta-fill);}
 .ci-note{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);}
 .ci-note:last-child{border-bottom:none;}
 .ci-note .ic{width:34px;height:34px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb, var(--accent) 14%, transparent);color:var(--accent);}
@@ -577,9 +611,9 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .cal-mo .d.pad{visibility:hidden;}
 .an-video{position:relative;display:block;width:100%;height:156px;border:none;padding:0;border-radius:16px;overflow:hidden;margin:0 0 14px;cursor:pointer;font-family:inherit;text-align:left;}
 .an-video img{width:100%;height:100%;object-fit:cover;display:block;}
-.an-video::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(11,23,53,.72),rgba(11,23,53,.12) 55%,transparent);}
-.an-play{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:1;width:48px;height:48px;border-radius:999px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;}
-.an-video-t{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;color:#fff;}
+.an-video::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--bg),color-mix(in srgb,var(--bg) 20%,transparent) 55%,transparent);}
+.an-play{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:1;width:48px;height:48px;border-radius:999px;background:var(--cta-fill);color:#fff;display:flex;align-items:center;justify-content:center;}
+.an-video-t{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;color:var(--text);}
 .an-video-t b{display:block;font-size:var(--t-body);font-weight:var(--w-semibold);line-height:var(--lh-snug);}
 .an-video-t span{display:block;margin-top:2px;font-size:var(--t-micro);font-weight:var(--w-semibold);opacity:.9;}
 .an-row{display:flex;align-items:flex-start;gap:12px;}
@@ -660,7 +694,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
     <div class="onb-welcome" id="onb-s0">
       <h2 style="font-size:var(--t-display);letter-spacing:var(--ls-tight);">Vitaj vo VITAL</h2>
       <div class="onb-feat"><div class="ic brand-ring"></div><div><b>VITAL points</b><p>Osem oblastí zdravia v jednom čísle, ktoré zlepšuješ každý deň.</p></div></div>
-      <div class="onb-feat"><div class="ic" style="background:var(--accent);color:#fff;" data-ic="check" data-s="17"></div><div><b>Tvoje 3 hlavné kroky</b><p>Zo štrnástich krokov vyberieme tri, na ktoré sa teraz vyplatí sústrediť.</p></div></div>
+      <div class="onb-feat"><div class="ic" style="background:var(--cta-fill);color:#fff;" data-ic="check" data-s="17"></div><div><b>Tvoje 3 hlavné kroky</b><p>Zo štrnástich krokov vyberieme tri, na ktoré sa teraz vyplatí sústrediť.</p></div></div>
       <div class="onb-feat"><div class="ic" style="background:var(--glass-2);color:var(--cy-soft);" data-ic="star" data-s="17"></div><div><b>Spresňuj dátami</b><p>Doplnky, výsledky vyšetrení a denné záznamy robia protokol presnejším.</p></div></div>
       <p class="tiny" style="margin-top:24px;">Protokol je zadarmo a natrvalo. Trvá to menej ako 5 minút.</p>
     </div>
@@ -813,10 +847,14 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
       <div class="hd"></div>
       <div class="pagetitle">Kroky</div>
       <div class="pagesub">Tvoje personalizované kroky pre zdravie, výkon a dlhší život.</div>
-      <button class="vban glass" type="button" onclick="openSheet('krokvideo')">
-        <span class="tile-ic" data-ic="play" data-s="18"></span>
-        <span><b>Ako fungujú kroky</b><span class="sub">1 min video</span></span>
-        <span class="cv" data-ic="chevronRight" data-s="16"></span>
+      <button class="vban glass has-photo" type="button" onclick="openSheet('krokvideo')">
+        <img class="ph" src="covers/pohyb.jpg" alt="">
+        <span class="photo-veil"></span>
+        <span class="copy">
+          <span class="tile-ic" data-ic="play" data-s="16"></span>
+          <span><b>Ako fungujú kroky</b><span class="sub">1 min video</span></span>
+          <span class="cv" data-ic="chevronRight" data-s="16"></span>
+        </span>
       </button>
       <div class="kr-tabs" id="kr-tabs">
         <button type="button" class="on" data-k="v" onclick="jumpKrok('v')"><span class="ic" data-ic="check" data-s="16"></span><span><b>Top 3</b><small>Prvé priority</small></span></button>
@@ -849,17 +887,21 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
     <!-- ---------- OBLASTI ---------- -->
     <div id="p-oblasti" hidden>
       <div class="hd"></div>
-      <button class="vban glass" type="button" onclick="openSheet('video')">
-        <span class="tile-ic" data-ic="play" data-s="18"></span>
-        <span><b>Ako funguje tvoj protokol</b><span class="sub">1 min video</span></span>
-        <span class="cv" data-ic="chevronRight" data-s="16"></span>
+      <button class="vban glass has-photo" type="button" onclick="openSheet('video')">
+        <img class="ph" src="covers/sportovec.jpg" alt="">
+        <span class="photo-veil"></span>
+        <span class="copy">
+          <span class="tile-ic" data-ic="play" data-s="16"></span>
+          <span><b>Ako funguje tvoj protokol</b><span class="sub">1 min video</span></span>
+          <span class="cv" data-ic="chevronRight" data-s="16"></span>
+        </span>
       </button>
       <div class="pagetitle">Oblasti</div>
-      <div class="pagesub">Tvoje zdravie je rozdelené do 8 prepojených oblastí. Každá oblasť obsahuje tvoje konkrétne kroky, odporúčania a vysvetlenia.</div>
+      <div class="pagesub">Tvoj osobný plán • 10 oblastí pre širšie pochopenie.</div>
       <div class="area-grid" id="area-grid"></div>
       <button type="button" class="mcard glass" style="margin-top:14px;" onclick="openSheet('video')">
-        <span class="ic" data-ic="target" data-s="17"></span>
-        <span class="tt"><span class="nm">Komplexný plán pre tvoje zdravie</span><span class="ds">Každú oblasť otvoríš a nájdeš v nej kroky, odporúčania a tipy.</span></span>
+        <span class="ic" data-ic="grid" data-s="17"></span>
+        <span class="tt"><span class="nm">Komplexný plán pre tvoje zdravie</span><span class="ds">Tvoj protokol je rozdelený do 10 oblastí. Každú oblasť môžeš otvoriť a pozrieť si detailné kroky, odporúčania a tipy.</span></span>
         <span class="cv" data-ic="chevronRight" data-s="16"></span>
       </button>
     </div>
@@ -878,6 +920,21 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
       <div id="prod-pane"></div>
     </div>
 
+    <!-- ---------- OBLASŤ ---------- -->
+    <div id="p-oblast" hidden>
+      <div class="hd subhd">
+        <button class="onb-back" onclick="backSub()" aria-label="Späť"><span data-ic="chevronLeft" data-s="17"></span></button>
+        <span class="lg"><img src="logo.svg" alt="VITAL" width="738" height="190"></span>
+        <div class="hd-r" style="margin-left:auto;">
+          <button class="gear theme-btn" onclick="toggleTheme()" aria-label="Prepnúť tému"><span class="ic-sun" data-ic="sun" data-s="22"></span><span class="ic-moon" data-ic="moon" data-s="22"></span></button>
+          <button class="avatar" onclick="openSub('profil')" aria-label="Profil"><img class="avatar-img" src="avatar.png" alt=""></button>
+        </div>
+      </div>
+      <div class="pagetitle" id="oblast-title"></div>
+      <div class="pagesub" id="oblast-sub"></div>
+      <div id="oblast-body"></div>
+    </div>
+
     <!-- ---------- VIAC (mimo lišty) ---------- -->
     <div id="p-viac" hidden>
       <div class="hd subhd">
@@ -886,14 +943,14 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
       </div>
       <div class="pagetitle">Viac</div>
       <div class="pagesub">Všetko dôležité na jednom mieste.</div>
-      <button type="button" class="mcard glass" onclick="openSub('profil')"><span class="ic" data-ic="user" data-s="17"></span><span class="tt"><span class="nm">Profil a osobné údaje</span><span class="ds">Údaje, zdravie a protokol</span></span><img class="ph" src="covers/spanok.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSub('ciele')"><span class="ic" data-ic="star" data-s="17"></span><span class="tt"><span class="nm">Tvoje ciele</span><span class="ds">Ciele, ktoré si vybral</span></span><img class="ph" src="covers/pohyb.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSub('test')"><span class="ic" data-ic="beaker" data-s="17"></span><span class="tt"><span class="nm">Testovanie a diagnostika</span><span class="ds">Krvné testy a biomarkery</span></span><img class="ph" src="covers/bunky.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="activityHeart" data-s="17"></span><span class="tt"><span class="nm">Preventívne zdravie</span><span class="ds">Kontroly a pripomienky</span></span><img class="ph" src="covers/toxiny.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="info" data-s="17"></span><span class="tt"><span class="nm">AI chat</span><span class="ds">Opýtaj sa na svoj plán</span></span><img class="ph" src="covers/stres.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openTips()"><span class="ic" data-ic="star" data-s="17"></span><span class="tt"><span class="nm">Motivácia</span><span class="ds">Tipy a návyky</span></span><img class="ph" src="covers/vyziva.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSheet('video')"><span class="ic" data-ic="play" data-s="17"></span><span class="tt"><span class="nm">Videá a edukácia</span><span class="ds">Ako VITAL funguje</span></span><img class="ph" src="covers/omega.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
-      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="lock" data-s="17"></span><span class="tt"><span class="nm">Nastavenia</span><span class="ds">Upozornenia a súkromie</span></span><img class="ph" src="covers/crevo.jpg" alt=""><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSub('profil')"><span class="ic" data-ic="user" data-s="17"></span><span class="tt"><span class="nm">Profil a osobné údaje</span><span class="ds">Údaje, zdravie a protokol</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSub('ciele')"><span class="ic" data-ic="star" data-s="17"></span><span class="tt"><span class="nm">Tvoje ciele</span><span class="ds">Ciele, ktoré si vybral</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSub('test')"><span class="ic" data-ic="beaker" data-s="17"></span><span class="tt"><span class="nm">Testovanie a diagnostika</span><span class="ds">Krvné testy a biomarkery</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="activityHeart" data-s="17"></span><span class="tt"><span class="nm">Preventívne zdravie</span><span class="ds">Kontroly a pripomienky</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="info" data-s="17"></span><span class="tt"><span class="nm">AI chat</span><span class="ds">Opýtaj sa na svoj plán</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openTips()"><span class="ic" data-ic="star" data-s="17"></span><span class="tt"><span class="nm">Motivácia</span><span class="ds">Tipy a návyky</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSheet('video')"><span class="ic" data-ic="play" data-s="17"></span><span class="tt"><span class="nm">Videá a edukácia</span><span class="ds">Ako VITAL funguje</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
+      <button type="button" class="mcard glass" onclick="openSheet('soon')"><span class="ic" data-ic="lock" data-s="17"></span><span class="tt"><span class="nm">Nastavenia</span><span class="ds">Upozornenia a súkromie</span></span><span class="cv" data-ic="chevronRight" data-s="16"></span></button>
     </div>
 
     <!-- ---------- CIELE ---------- -->
@@ -1047,7 +1104,9 @@ const AREA_ICO={
   'OMEGA':ic('droplets',20),
   'ČREVO':ic('beaker',20),
   'BUNKY':ic('zap',20),
-  'TOXÍNY':ic('alertCircle',20)
+  'TOXÍNY':ic('alertCircle',20),
+  'TESTOVANIE':ic('fp',20),
+  'DOPLNKY':ic('beaker',20)
 };
 const IMG={
   vyziva:'data:image/webp;base64,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',
@@ -1080,7 +1139,13 @@ const AREAS=[
  {k:'BUNKY',v:40,hist:[28,30,32,34,36,38,40],
   what:'Fasting, otužovanie a sauna, až keď na ne bude tvoje telo pripravené.',edu:LOREM},
  {k:'TOXÍNY',v:35,hist:[25,27,29,30,32,34,35],
-  what:'Voda, vzduch, plasty a kozmetika. Základná hygiena prostredia.',edu:LOREM}
+  what:'Voda, vzduch, plasty a kozmetika. Základná hygiena prostredia.',edu:LOREM},
+ {k:'TESTOVANIE',
+  what:'Výsledky vyšetrení, ktoré spresňujú dávky a ciele v protokole.',
+  edu:'Keď nahráš výsledky testov, dávky v protokole sa spresnia. Prehľad odporúčaných a absolvovaných vyšetrení ešte pripravujeme.'},
+ {k:'DOPLNKY',
+  what:'Doplnky a príslušenstvo podľa tvojho protokolu.',
+  edu:'Odporúčania vychádzajú z profilu, cieľov a dotazníka. Konkrétne produkty nájdeš priamo v tejto oblasti.'}
 ];
 const AREA_COVER={
   'VÝŽIVA':'covers/vyziva.jpg',
@@ -1090,7 +1155,9 @@ const AREA_COVER={
   'OMEGA':'covers/omega.jpg',
   'ČREVO':'covers/crevo.jpg',
   'BUNKY':'covers/bunky.jpg',
-  'TOXÍNY':'covers/toxiny.jpg'
+  'TOXÍNY':'covers/toxiny.jpg',
+  'TESTOVANIE':'covers/sportovec.jpg',
+  'DOPLNKY':'https://cdn.prod.website-files.com/66f6f9f3dc54b731f731c8f7/69c156703931baac64522a03_1-1%20-%202026-03-23T154557.506.png'
 };
 function shCover(k){
   const src=AREA_COVER[k];
@@ -1127,10 +1194,14 @@ const STAGES=[
    {nm:'Prijímaj dostatok bielkovín',card:'Dosť bielkovín',det:'Cieľ je 2,2 g na kilogram tvojej váhy, teda približne 180 g denne. Bielkoviny chránia svaly počas chudnutia a zasýtia ťa nadlho, takže nemusíš bojovať s chuťami. Rozdeľ ich do každého hlavného jedla, nie všetko naraz večer. Sesterský cieľ z protokolu je 30 až 40 g vlákniny denne.'},
    {nm:'Jedz pravidelne a nevynechávaj jedlá',card:'Nevynechávaj jedlá',det:'Nevynechávaj jedlá, ani keď „nemáš hlad“. Pravidelnosť drží deficit bez večerného dohánania. Posledné jedlo daj 3 až 4 hodiny pred spánkom. Kávu a kofeín ukonči do 13. až 14. hodiny, aby ti nerušili zaspávanie.'}]},
  {id:2,area:'POHYB',nm:'Nastav si tréning a každodenný pohyb',g:'d',acts:[
-   {nm:'Nazbieraj 8 000 až 12 000 krokov denne',card:'8 000 až 12 000 krokov',det:LOREM},
-   {nm:'Zaraď silový tréning 3 až 4× týždenne',card:'Sila 3 až 4× týždenne',det:LOREM},
-   {nm:'Pridaj pokojné kardio v zóne 2',card:'Kardio v zóne 2',det:LOREM},
-   {nm:'Venuj 5 až 10 minút denne mobilite',card:'Mobilita 5 až 10 min',det:LOREM}]},
+   {nm:'Silový tréning',card:'Silový tréning',det:''},
+   {nm:'Kardio v zóne 2',card:'Kardio v zóne 2',det:'Srdce, mitochondrie, metabolizmus.'},
+   {nm:'VO₂ max a intervaly',card:'VO₂ max a intervaly',det:'Výkon, kondícia, spaľovanie kalórií.'},
+   {nm:'Mobilita a flexibilita',card:'Mobilita a flexibilita',det:'Rozsah pohybu, kĺby, pohyb bez bolesti.'},
+   {nm:'Rovnováha a koordinácia',card:'Rovnováha a koordinácia',det:'Stabilita, nervový systém, funkčnosť.'},
+   {nm:'Denný pohyb',card:'Denný pohyb',det:'Viac pohybu počas dňa, menej sedenia.'},
+   {nm:'Rady a tipy',card:'Rady a tipy',det:LOREM},
+   {nm:'Časté otázky',card:'Časté otázky',det:LOREM}]},
  {id:3,area:'OMEGA',nm:'Optimalizuj svoj omega pomer',g:'d',acts:[
    {nm:'Zvýš príjem omega-3',card:'Viac omega-3',det:'Ryby ješ menej než raz do týždňa, takže tvoje omega-3 hladiny sú pravdepodobne nízke. Cieľ je 1,5 až 2 gramy EPA plus DHA denne. Najspoľahlivejšia cesta je doplnok, pretože dostať sa na túto dávku z jedla by znamenalo tučné ryby trikrát do týždňa.'},
    {nm:'Zníž príjem omega-6',card:'Menej omega-6',det:LOREM},
@@ -1207,7 +1278,7 @@ const CIELE=[
  {id:'chudnutie',nm:'Chudnutie',sub:'Menej tuku, viac energie',cover:'covers/vyziva.jpg'},
  {id:'svaly',nm:'Naberanie svalov',sub:'Sila a výkon',cover:'covers/pohyb.jpg'}
 ];
-const AREA_ORDER=['TOXÍNY','OMEGA','ČREVO','POHYB','VÝŽIVA','SPÁNOK','BUNKY','STRES'];
+const AREA_ORDER=['SPÁNOK','VÝŽIVA','STRES','TOXÍNY','POHYB','OMEGA','ČREVO','BUNKY','TESTOVANIE','DOPLNKY'];
 const GEAR=[
  {nm:'Filter na vodu',ds:'Čistejšia voda každý deň',img:'products/filter.png'},
  {nm:'Fľaša na vodu',ds:'Voda po ruke celý deň',img:'products/flasa.png'},
@@ -1302,14 +1373,67 @@ function shAcc(icon,title,body,lock){
     <span class="ai">${ic(icon,16)}</span><span class="at">${title}</span><span class="cv">${ICO.chd}</span></summary>
     <div class="abody">${lock?`<p>${lock}</p>`:body}</div></details>`;
 }
-function shRow(s){
-  return `<div class="tile glass${s.done?' done':''}" onclick="openKrokSheet(${s.id},'area')">
-    <div class="tile-ic">${areaIcon(s)}</div>
-    <div class="tt"><div class="ar">${areaTitle(s.area)} · krok ${s.id}</div><div class="nm">${s.nm}</div></div>
-    <span class="cv">${ICO.chr}</span></div>`;
+function stageRow(s, from){
+  const lock=stageLocked(s);
+  const src=AREA_COVER[s.area]||'';
+  const acts=(s.acts||[]).map(a=>`<li>${a.card||a.nm}</li>`).join('');
+  const open=from?`openKrokSheet(${s.id},'area')`:`openKrokSheet(${s.id})`;
+  return `<div class="kcard glass${s.done?' done':''}${lock?' lock':''}" id="st-${s.id}" onclick="${open}">
+      <div class="ph">${src?`<img src="${src}" alt="">`:''}<span class="n">${stageNo(s)}</span></div>
+      <div class="tt"><div class="ar">${areaTitle(s.area)}</div><div class="nm">${s.nm}</div>${acts?`<ul class="acts">${acts}</ul>`:''}</div>
+    </div>`;
+}
+function shRow(s){ return stageRow(s,'area'); }
+function tipBlock(icon,title,pill,points,photo,pos){
+  const bg=photo?' has-photo':'';
+  const img=photo?`<img class="ph" alt="" style="--pos:${pos||'center'}" src="${photo}">`:'';
+  return `<div class="tip-block${bg}">${img}${photo?'<span class="photo-veil"></span>':''}<div class="hd"><span class="ic">${ic(icon,16)}</span><span class="tt">${title}</span><span class="pill">${pill}</span></div>
+    <ul>${points.map(p=>`<li>${ic('check',14)}<span>${p}</span></li>`).join('')}</ul></div>`;
+}
+function pohybStrengthBody(){
+  return `<p>Buduj svaly, zvyšuj silu a podpor svoj metabolizmus.</p>
+    ${tipBlock('zap','Tvoj silový plán','3× týždenne',[
+      'Cieľ je nabrať svaly, preto 3 tréningy týždenne',
+      '45 až 60 minút na tréning',
+      'Celé telo, spočiatku',
+      'Plán sedí na tvoju úroveň, čas a vybavenie'
+    ],'covers/sportovec.jpg','center 40%')}
+    ${tipBlock('activity','Ako trénovať','blízko zlyhania',[
+      'Postupne zvyšuj váhu, opakovania a náročnosť cvikov',
+      'Sila a svalová hmota sa trénujú inak, podľa cieľa',
+      'Intenzita je dôležitejšia než extrémne váhy'
+    ],'covers/pohyb.jpg','32% 45%')}
+    ${tipBlock('shield','Technika a regenerácia','dlhodobo',[
+      'Stroje aj voľné váhy budujú svaly rovnako dobre',
+      'Spánok, stres, kĺby a šľachy rozhodujú, či vydržíš',
+      'Myostatín, regenerácia, longevity a ďalšie témy'
+    ],'covers/sportovec.jpg','68% 55%')}`;
+}
+function spanokRhythmBody(){
+  return `<p>Správne načasovanie a dĺžka spánku podporujú regeneráciu mozgu, hormónov aj energie. Hlavné odporúčania v skratke.</p>
+    ${tipBlock('bed','Dĺžka spánku','7,5 až 8,5 h',[
+      'Ideálne 7,5 až 8,5 hodín denne',
+      'Jeden cyklus trvá asi 90 minút',
+      'Hlboký a REM spánok zlepšujú regeneráciu aj výkon'
+    ],'covers/spanok.jpg','left center')}
+    ${tipBlock('clock','Kedy zaspávať','22:00 až 23:30',[
+      'Ideálne okno 22:00 až 23:30',
+      'Najviac hlbokého spánku je v prvej polovici noci',
+      'Cirkadiánny rytmus beží v 24-hodinovom cykle'
+    ],'covers/spanok.jpg','left 70%')}
+    ${tipBlock('moon','Poobedný spánok','10 až 25 min',[
+      'Krátky spánok 10 až 25 minút',
+      'Zlepšuje pozornosť a výkon',
+      'Dlhší ako 30 až 60 minút môže narušiť nočný spánok'
+    ],'covers/stres.jpg','left bottom')}
+    <div class="tip-acts">
+      <button type="button" class="cta" onclick="openSheet('video')">${ic('play',14)} 2 min video</button>
+      <button type="button" class="cta ghost" onclick="openSheet('video')">${ic('info',14)} Zistiť viac</button>
+    </div>`;
 }
 function actIcon(s,i){
   if(s.id===1) return ['zap','activity','apple','clock'][i]||'apple';
+  if(s.id===2) return ['zap','activityHeart','flame','activity','target','activity','info','info'][i]||'activity';
   const map={'VÝŽIVA':'apple','SPÁNOK':'moon','STRES':'activityHeart','POHYB':'activity','OMEGA':'droplets','ČREVO':'beaker','BUNKY':'zap','TOXÍNY':'alertCircle'};
   return map[s.area]||'info';
 }
@@ -1321,7 +1445,7 @@ function renderGoalsRow(){
   const n=CIELE.length;
   el.className='goals '+goalLayout(n);
   el.innerHTML=CIELE.map(c=>`<div class="g"><button type="button" class="gcard glass" onclick="openSub('ciele')">
-    <img src="${c.cover}" alt=""><span class="nm">${c.nm}</span></button></div>`).join('');
+    <img src="${c.cover}" alt=""><span class="nm photo-cap"><span>${c.nm}</span>${ICO.chr}</span></button></div>`).join('');
 }
 function renderHomeModule(){
   const el=document.getElementById('ov-module');
@@ -1376,19 +1500,6 @@ function renderGroups(){
     </div>`;
   }).join('');
 }
-function stageRow(s){
-  const lock=stageLocked(s);
-  const src=AREA_COVER[s.area]||'';
-  const acts=(s.acts||[]).map(a=>`<li>${a.card||a.nm}</li>`).join('');
-  return `<div class="kcard glass${s.done?' done':''}${lock?' lock':''}" id="st-${s.id}" onclick="openKrokSheet(${s.id})">
-      <div class="ph">${src?`<img src="${src}" alt="">`:''}<span class="n">${stageNo(s)}</span></div>
-      <div class="tt"><div class="ar">${areaTitle(s.area)}</div><div class="nm">${s.nm}</div>${acts?`<ul class="acts">${acts}</ul>`:''}</div>
-      <div class="side">
-        <span class="cv">${ICO.chr}</span>
-        <span class="bx${s.done?' on':''}${lock?' lock':''}" onclick="event.stopPropagation();toggleStageDone(${s.id})" role="checkbox" aria-checked="${s.done?'true':'false'}" aria-label="Splniť krok">${s.done?ICO.check:''}</span>
-      </div>
-    </div>`;
-}
 function setKrokTab(k){
   document.querySelectorAll('#kr-tabs button').forEach(b=>b.classList.toggle('on', b.dataset.k===k));
 }
@@ -1439,7 +1550,7 @@ function toggleStageDone(id){
   renderGroups(); renderOverview(); renderAreas();
   if(s.done && vitalsHit()===3) toast('Všetky tri Vitals dnes splnené. Deň sa počíta naplno.');
   closeSheet();
-  go('kroky');
+  go(s.done?'checkin':'kroky');
 }
 function krok1Metric(){
   const m=KROK1.macros;
@@ -1486,18 +1597,18 @@ function openKrokSheet(id,from){
     ?'Tvoje cieľové čísla pri chudnutí — 82 kg, pohyb 1–2× týždenne. Protokol, nie denník jedál.'
     :'Úlohy, ktoré tento krok drží pohromade.';
   const ghost=fromArea
-    ? `<button class="cta ghost" style="margin-top:8px;" onclick="openArea(${areaIdx})">Späť na oblasť</button>`
+    ? `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet()">Späť na oblasť</button>`
     : `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet();go('kroky')">Všetky kroky</button>`;
   sheet(`${shCover(s.area)}<div class="sh-hero">
-      <span class="badge-pill">${areaTitle(s.area)} · krok ${s.id}</span>
+      <span class="badge-pill">${areaTitle(s.area)} · krok ${stageNo(s)}</span>
       <h3>${s.nm}</h3>
       <p class="sh-lead">${lead}</p>
     </div>
     ${rich?krok1Metric():''}
     <div class="sh-sec">${rich?'Úlohy v tomto kroku':'Čo tento krok obsahuje'}</div>
-    ${s.acts.map((a,i)=>shAcc(actIcon(s,i),a.nm,a.lock?null:(rich?bodies[i]:`<p>${a.det}</p>`),a.lock||null)).join('')}
+    ${s.acts.map((a,i)=>shAcc(actIcon(s,i),a.nm,a.lock?null:(rich?bodies[i]:(s.id===6&&i===0?spanokRhythmBody():(s.id===2&&i===0?pohybStrengthBody():`<p>${a.det}</p>`))),a.lock||null)).join('')}
     <button class="cta" style="margin-top:14px;${lock?'opacity:.4':''}" onclick="toggleStageDone(${s.id})">${lock?'Zamknuté':(s.done?'Označiť ako nesplnené':'Splniť krok')}</button>
-    ${ghost}`, fromArea?()=>openArea(areaIdx):null);
+    ${ghost}`, fromArea?()=>closeSheet():null);
 }
 function openStage(id){ openKrokSheet(id); }
 function renderWeek(id){
@@ -1524,11 +1635,9 @@ function renderAreas(){
   if(!el) return;
   el.innerHTML=AREA_ORDER.map(k=>{
     const i=AREAS.findIndex(a=>a.k===k);
-    const n=STAGES.filter(s=>s.area===k).length;
     return `<button type="button" class="area-card" onclick="openArea(${i})">
       <img src="${AREA_COVER[k]||''}" alt="">
-      <span class="nm"><span>${areaTitle(k)}</span>${ICO.chr}</span>
-      <span class="ct">${krokCount(n)}</span>
+      <span class="nm photo-cap"><span>${areaTitle(k)}</span>${ICO.chr}</span>
     </button>`;
   }).join('');
 }
@@ -1554,16 +1663,105 @@ function chartTap(e){ if(!_hist) return;
   const w=_hist.length-1-i, t=document.getElementById('chart-tip');
   if(t) t.innerHTML=`<b class="num" style="font-size:var(--t-stat);font-weight:var(--w-bold);color:var(--text);">${_hist[i]}</b> <span style="color:var(--text-3);font-weight:var(--w-regular);">bodov · ${w===0?'dnes':'pred '+w+' t.'}</span>`;
 }
-function openArea(i){
-  const a=AREAS[i], rel=STAGES.filter(s=>s.area===a.k), rich=AREA_RICH[a.k]||{};
-  const n=AREA_NO[a.k]||(i+1), done=rel.filter(s=>s.done).length, dlt=a.hist[a.hist.length-1]-a.hist[0];
-  const why=(rich.why||(a.edu&&a.edu!==LOREM?a.edu:''));
-  sheet(`${shCover(a.k)}<div class="sh-hero">
-      <span class="badge-pill">Oblasť ${n} / 8</span>
-      <h3>${areaTitle(a.k)}</h3>
-      <p class="sh-lead">${a.what}</p>
+let areaOpen=-1;
+function areaLead(t){
+  const i=t.indexOf('. ');
+  return i>0?t.slice(0,i+1):t;
+}
+function areaRow(icon,title,desc,photo,fn,pos){
+  const img=photo?`<img class="ph" alt="" style="--pos:${pos||'left center'}" src="${photo}">`:'';
+  return `<button type="button" class="mcard glass${photo?' has-photo':''}" onclick="${fn}">${img}${photo?'<span class="photo-veil"></span>':''}<span class="ic">${ic(icon,17)}</span><span class="tt"><span class="nm">${title}</span><span class="ds">${desc}</span></span><span class="cv">${ICO.chr}</span></button>`;
+}
+function areaSheet(a,title,body,cta){
+  sheet(`<div class="sh-hero">
+      <span class="badge-pill">${areaTitle(a.k)}</span>
+      <h3>${title}</h3>
     </div>
-    <div class="sh-card sh-metric">
+    ${body}
+    ${cta||`<button class="cta ghost" style="margin-top:16px;" onclick="closeSheet()">Späť</button>`}`);
+}
+function openArea(i){
+  closeSheet();
+  areaOpen=i;
+  renderOblast();
+  if(visiblePage()!=='oblast') openSub('oblast');
+  else{ document.getElementById('scr').scrollTop=0; playEnter(document.getElementById('p-oblast')); }
+}
+const AREA_PRODS={
+  'SPÁNOK':{live:[0],soon:[2],gear:[4]},
+  'OMEGA':{live:[1]},
+  'ČREVO':{live:[2],soon:[1]},
+  'STRES':{live:[0],soon:[2]},
+  'DOPLNKY':{live:[0,1,2]}
+};
+function renderOblast(){
+  const i=areaOpen; if(i<0) return;
+  const a=AREAS[i], rel=STAGES.filter(s=>s.area===a.k), rich=AREA_RICH[a.k]||{};
+  const done=rel.filter(s=>s.done).length, dlt=a.hist?a.hist[a.hist.length-1]-a.hist[0]:0;
+  const why=(rich.why||(a.edu&&a.edu!==LOREM?a.edu:''));
+  const cover=AREA_COVER[a.k]||'';
+  const title=areaTitle(a.k);
+  const prods=AREA_PRODS[a.k];
+  const sleep=a.k==='SPÁNOK';
+  document.getElementById('oblast-title').textContent=title;
+  document.getElementById('oblast-sub').textContent=a.what;
+  const rows=[
+    sleep?areaRow('bed','Pochopenie základov','Cyklus, dĺžka spánku a kedy zaspávať.',cover,`openAreaZaklady(${i})`,'58% 36%'):'',
+    why?areaRow('brain','Prečo to riešiš ty',sleep?'Horšie zaspávanie a zvýšený stres.':areaLead(why),cover,`openAreaWhy(${i})`,'28% 58%'):'',
+    rich.problem&&rich.solve?areaRow('activity','Problém vs riešenie','Čo ti prekáža a čo s tým protokol robí.',cover,`openAreaVs(${i})`,'center 48%'):'',
+    areaRow('list','Kroky v tejto oblasti',krokCount(rel.length)+(rel.length?` · ${done}/${rel.length} dnes`:''),cover,`openAreaKroky(${i})`,'72% 52%'),
+    sleep?areaRow('info','Časté otázky','Dĺžka, čas zaspávania a poobedný spánok.',cover,`openAreaFaq(${i})`,'46% 22%'):'',
+    a.hist?areaRow('target','Ako zistiť svoj stav',a.v+' / 100 · +'+dlt+' za 6 t',cover,`openAreaStav(${i})`,'58% 68%'):'',
+    prods?areaRow('beaker',sleep?'Doplnky pre spánok':'Doplnky',PRODUCTS[prods.live[0]].nm+((prods.live.length+(prods.soon||[]).length+(prods.gear||[]).length)>1?' a ďalšie':''),PRODUCTS[prods.live[0]].img||cover,`openAreaDoplnky(${i})`,'center'):''
+  ].filter(Boolean).join('');
+  const el=document.getElementById('oblast-body');
+  el.innerHTML=`<button type="button" class="an-video" onclick="openSheet('video')">
+      <img src="${cover}" alt="">
+      <span class="an-play">${ic('play',18)}</span>
+      <span class="an-video-t"><b>Ako funguje ${title.toLowerCase()}</b><span>${sleep?'2 min video':'Krátke vysvetlenie'}</span></span>
+    </button>
+    <div class="sect"><h2>Čo sa v tejto oblasti dozvieš</h2></div>
+    ${rows}`;
+  paintIcons(el);
+}
+function openAreaZaklady(i){
+  areaSheet(AREAS[i],'Pochopenie základov',spanokRhythmBody());
+}
+function openAreaFaq(i){
+  areaSheet(AREAS[i],'Časté otázky',
+    `${shAcc('bed','Koľko spať?',`<p>Ideálne 7,5 až 8,5 hodín denne. Jeden cyklus trvá asi 90 minút. Hlboký a REM spánok zlepšujú regeneráciu aj výkon.</p>`)}
+    ${shAcc('clock','Kedy zaspávať?',`<p>Ideálne okno 22:00 až 23:30. Najviac hlbokého spánku je v prvej polovici noci. Cirkadiánny rytmus beží v 24-hodinovom cykle.</p>`)}
+    ${shAcc('moon','Poobedný spánok?',`<p>Krátky spánok 10 až 25 minút zlepšuje pozornosť a výkon. Dlhší ako 30 až 60 minút môže narušiť nočný spánok.</p>`)}`);
+}
+function openAreaDoplnky(i){
+  const a=AREAS[i], map=AREA_PRODS[a.k]||{};
+  const live=(map.live||[]).map(ix=>prodRow(PRODUCTS[ix],ix,false,'hi')).join('');
+  const soon=(map.soon||[]).map(ix=>prodRow(PRODUCTS_SOON[ix],ix,true,'rec')).join('');
+  const gear=(map.gear||[]).map(ix=>`<button type="button" class="pcard glass" onclick="openGear(${ix})">
+      ${GEAR[ix].img?`<img src="${GEAR[ix].img}" alt="">`:`<div class="ph"></div>`}
+      <div class="tt"><div class="nm">${GEAR[ix].nm}</div><div class="ds">${GEAR[ix].ds}</div></div>
+      <span class="cv">${ICO.chr}</span></button>`).join('');
+  areaSheet(a,'Doplnky',`<div class="stack">${live}${soon}${gear}</div>`,
+    `<button class="cta" style="margin-top:16px;" onclick="closeSheet();go('produkty')">Otvoriť produkty</button>`);
+}
+function openAreaWhy(i){
+  const a=AREAS[i], rich=AREA_RICH[a.k]||{};
+  const why=(rich.why||(a.edu&&a.edu!==LOREM?a.edu:''));
+  areaSheet(a,'Prečo to riešiš ty',shCallout('info','',why));
+}
+function openAreaVs(i){
+  const a=AREAS[i], rich=AREA_RICH[a.k]||{};
+  areaSheet(a,'Problém vs riešenie',shVs(rich.problem,rich.solve));
+}
+function openAreaKroky(i){
+  const a=AREAS[i], rel=STAGES.filter(s=>s.area===a.k);
+  areaSheet(a,'Kroky v tejto oblasti',`<div class="tiles">${rel.map(s=>shRow(s)).join('')}</div>`,
+    `<button class="cta" style="margin-top:16px;" onclick="closeSheet();go('kroky')">Otvoriť moje kroky</button>`);
+}
+function openAreaStav(i){
+  const a=AREAS[i], rel=STAGES.filter(s=>s.area===a.k), rich=AREA_RICH[a.k]||{};
+  const done=rel.filter(s=>s.done).length, dlt=a.hist?a.hist[a.hist.length-1]-a.hist[0]:0;
+  areaSheet(a,'Ako zistiť svoj stav',`<div class="sh-card sh-metric">
       ${shDonut(a.v,100,ringColor(a.v),'/ 100')}
       ${shCols([
         {amt:'+'+dlt,lbl:'za 6 t'},
@@ -1572,17 +1770,11 @@ function openArea(i){
       ])}
     </div>
     ${rich.stats?shStatrow(rich.stats):''}
-    ${why?`<div class="sh-sec">Prečo to riešiš ty</div>${shCallout('info','',why)}`:''}
-    ${rich.problem&&rich.solve?`<div class="sh-sec">Problém vs riešenie</div>${shVs(rich.problem,rich.solve)}`:''}
-    <div class="sh-sec">VITAL points v čase</div>
-    <div class="sh-spark">${(_hist=a.hist, spark(a.hist))}
+    <div class="sh-spark" style="margin-top:12px;">${(_hist=a.hist, spark(a.hist))}
       <div class="sh-ylabs">${window._yl.map(v=>`<span>${v}</span>`).join('')}</div>
       <div id="chart-tip" style="min-height:22px;padding:2px 2px 0;font-size:var(--t-meta);color:var(--text-3);">Ťukni na graf pre hodnotu</div>
       <div style="display:flex;justify-content:space-between;font-size:var(--t-micro);color:var(--text-3);font-weight:var(--w-semibold);padding:4px 2px;" class="num"><span>−6 t</span><span>−4 t</span><span>−2 t</span><span>dnes</span></div>
-    </div>
-    <div class="sh-sec">Kroky v tejto oblasti</div>
-    <div class="tiles">${rel.map(s=>shRow(s)).join('')}</div>
-    <button class="cta" style="margin-top:14px;" onclick="closeSheet();go('kroky')">Otvoriť moje kroky</button>`);
+    </div>`);
 }
 
 /* ===== PRODUKTY ===== */
@@ -1852,15 +2044,16 @@ function paintCiRing(el){
 }
 function ciProgress(){
   const full=DAYS.filter((x,i)=>i!==TODAY&&x.vitals>=3).length;
-  const avg=Math.round(AREAS.reduce((a,x)=>a+x.v,0)/AREAS.length);
-  const rows=[...AREAS].sort((a,b)=>b.v-a.v).slice(0,3).map(a=>`<div class="ci-note"><span class="ic">${AREA_ICO[a.k]||''}</span><div style="flex:1;"><b>${areaTitle(a.k)}</b><div class="bar"><i style="width:${a.v}%"></i></div></div><span class="ci-pill">${a.v} %</span></div>`).join('');
+  const scored=AREAS.filter(x=>x.v!=null);
+  const avg=Math.round(scored.reduce((a,x)=>a+x.v,0)/scored.length);
+  const rows=[...scored].sort((a,b)=>b.v-a.v).slice(0,3).map(a=>`<div class="ci-note"><span class="ic">${AREA_ICO[a.k]||''}</span><div style="flex:1;"><b>${areaTitle(a.k)}</b><div class="bar"><i style="width:${a.v}%"></i></div></div><span class="ci-pill">${a.v} %</span></div>`).join('');
   return `<div class="card glass"><b style="font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);">${full} dní konzistencie</b><p class="tiny" style="margin:4px 0 0;">Skvelá práca. Pokračuj v tempe.</p></div>
     <div class="card glass" style="text-align:center;"><div class="ci-ring" data-p="${avg}"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="48" class="track"></circle><circle cx="60" cy="60" r="48" class="fill" style="stroke:${scaleColor(avg)}"></circle></svg><div class="stat-v">${avg} %</div></div><div class="tiny">Priemer ôsmich oblastí</div></div>
     <div class="sect"><h2>Oblasti v týždni</h2></div>
     <div class="card glass tight">${rows}</div>`;
 }
 const TABS=['prehlad','kroky','checkin','oblasti','produkty'];
-const SUBS=['viac','ciele','profil','test','analyza'];
+const SUBS=['viac','ciele','profil','test','analyza','oblast'];
 function hidePages(){
   [...TABS,...SUBS].forEach(x=>{ const el=document.getElementById('p-'+x); if(el) el.hidden=true; });
 }
