@@ -309,6 +309,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .sheet.has-cover .grab{position:relative;z-index:5;background:rgba(255,255,255,.62);box-shadow:0 0 0 1px rgba(11,23,53,.14),0 1px 4px rgba(11,23,53,.16);}
 .sheet.has-cover .close,.sheet.has-cover .back{z-index:6;background:rgba(255,255,255,.8);color:#0b1735;backdrop-filter:blur(12px) saturate(1.2);-webkit-backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 1px 6px rgba(11,23,53,.16),inset 0 1px 0 rgba(255,255,255,.9);}
 .sheet.has-cover .sh-hero{padding-right:0;}
+.sheet.has-back:not(.has-cover) .sh-hero{padding-left:48px;}
 .sheet h3{font-size:var(--t-stat);font-weight:var(--w-bold);letter-spacing:var(--ls-tight);margin:0 0 14px;}
 .sheet p{font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);line-height:var(--lh-body);}
 .badge-pill{display:inline-block;background:color-mix(in srgb, var(--accent) 12%, transparent);color:var(--accent);font-size:var(--t-micro);font-weight:var(--w-semibold);padding:5px 11px;border-radius:999px;margin-bottom:10px;box-shadow:inset 0 1px 0 var(--g-rim-hi);}
@@ -544,7 +545,7 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 .mcard .tt{flex:1;min-width:0;}
 .mcard .nm{display:block;font-size:var(--t-body);font-weight:var(--w-semibold);color:var(--text);line-height:var(--lh-snug);}
 .mcard .ds{display:block;font-size:var(--t-meta);font-weight:var(--w-regular);color:var(--text-3);margin-top:2px;line-height:var(--lh-snug);}
-.mcard .ph{width:72px;height:52px;object-fit:cover;border-radius:10px;flex:none;}
+.mcard .ph{width:72px;height:52px;object-fit:cover;object-position:var(--pos,center);border-radius:10px;flex:none;}
 .mcard .cv{flex:none;color:var(--text-3);}
 #p-oblast .pagesub{margin:8px 0 16px;}
 #p-oblast .an-video{height:168px;margin:0 0 4px;}
@@ -559,6 +560,26 @@ h1,h2,h3{font-family:var(--fh);font-weight:var(--w-bold);margin:0;letter-spacing
 #p-oblast .mcard.has-photo .ds{max-width:none;color:var(--text);}
 #p-oblast .mcard.has-photo .ic{background:color-mix(in srgb,var(--bg) 78%,transparent);}
 #p-oblast .mcard.has-photo .cv{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:1;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--bg) 82%,transparent);color:var(--text);}
+.sheet .an-video{height:168px;margin:0 0 16px;}
+.sheet .an-video::after{background:linear-gradient(to top,var(--sheet-bg),color-mix(in srgb,var(--sheet-bg) 20%,transparent) 55%,transparent);}
+.sheet .mcard{padding:14px;margin:0 0 10px;}
+.sheet .mcard.has-photo{position:relative;overflow:hidden;min-height:84px;align-items:center;padding:12px 14px;}
+.sheet .mcard.has-photo .ph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;transform:scale(1.9);transform-origin:var(--pos,62% 42%);display:block;border-radius:0;z-index:0;}
+.sheet .mcard.has-photo .ic,.sheet .mcard.has-photo .tt{position:relative;z-index:1;}
+.sheet .mcard.has-photo .tt{max-width:56%;}
+.sheet .mcard.has-photo .ds{max-width:none;color:var(--text);}
+.sheet .mcard.has-photo .ic{background:color-mix(in srgb,var(--sheet-bg) 78%,transparent);}
+.sheet .mcard.has-photo .cv{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:1;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--sheet-bg) 82%,transparent);color:var(--text);}
+.sheet .sh-cols-4{gap:6px;}
+.sheet .sh-cols-4 .amt{font-size:var(--t-stat);}
+.sheet .k1-mets{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:12px 0 8px;}
+.sheet .k1-met{display:flex;flex-direction:column;align-items:center;gap:6px;border:none;background:none;padding:4px 2px 6px;cursor:pointer;font-family:inherit;color:inherit;min-width:0;}
+.sheet .k1-met .ic{width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);}
+.sheet .k1-met .amt{font-size:var(--t-heading);font-weight:var(--w-bold);color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:var(--ls-tight);line-height:var(--lh-none);}
+.sheet .k1-met .lbl{display:flex;align-items:center;justify-content:center;gap:1px;font-size:var(--t-micro);font-weight:var(--w-semibold);color:var(--text-3);line-height:var(--lh-tight);text-align:center;}
+.sheet .k1-met .lbl svg{flex:none;opacity:.7;}
+.sheet .mcard:not(.has-photo) .ph{order:2;}
+.sheet .mcard:not(.has-photo) .cv{order:3;}
 .subhd .lg{margin-left:4px;}
 #ov-status{display:grid;grid-template-columns:1fr 124px;padding:0;overflow:hidden;align-items:stretch;}
 #ov-status .an-copy{padding:16px 12px 16px 18px;display:flex;flex-direction:column;min-width:0;gap:8px;}
@@ -1564,6 +1585,92 @@ function krok1Metric(){
     <span class="sh-chip">žiadny jojo</span>
   </div>`;
 }
+function krok1Intake(){
+  const mets=[
+    {ic:'flame',amt:'1 950',lbl:'kcal / deň',id:'plan',color:'var(--accent)'},
+    {ic:'apple',amt:'180 g',lbl:'Bielkoviny',id:'macros',color:'var(--macro-p)',go:true},
+    {ic:'zap',amt:'161 g',lbl:'Sacharidy',id:'macros',color:'var(--macro-c)',go:true},
+    {ic:'droplets',amt:'65 g',lbl:'Tuky',id:'macros',color:'var(--macro-f)',go:true}
+  ];
+  return `<div class="sh-sec" style="margin-top:2px;">Tvoj denný príjem živín</div>
+    <p class="sh-lead">Tvoje čísla pri chudnutí, 82 kg, pohyb 1–2× týždenne.</p>
+    <div class="k1-mets">${mets.map(x=>`<button type="button" class="k1-met" onclick="openKrok1Topic('${x.id}')">
+      <span class="ic">${ic(x.ic,15)}</span>
+      <span class="amt" style="color:${x.color}">${x.amt}</span>
+      <span class="lbl">${x.lbl}${x.go?ICO.chr:''}</span>
+    </button>`).join('')}</div>`;
+}
+function krok1FoodBody(){
+  const rich=AREA_RICH.VÝŽIVA||{};
+  return `${shVs(rich.problem,rich.solve)}
+    <p>Rozhoduje pomer, nie zoznam zakázaných jedál: dosť bielkovín v každom tanieri, 30 až 40 g vlákniny a žiadne vynechávanie.</p>`;
+}
+function krok1TrackBody(){
+  return `${shKv('Prístup','Protokol',80,'Nie denník každého sústa')}
+    <p>Nepočítaš každé sústo. 1 950 kcal je orientačný strop. Držíš bielkoviny, vlákninu a pravidelnosť. Keď chceš číslo skontrolovať, stačí odhad porcie, nie aplikácia na každú lyžicu.</p>`;
+}
+function krok1TipsBody(){
+  return shCallout('star','',(AREA_RICH.VÝŽIVA||{}).why||'');
+}
+function krok1FaqBody(){
+  return `${shAcc('zap','Koľko jesť?',`<p>Orientačný strop je 1 950 kcal denne. Pri 82 kg, chudnutí a pohybe 1–2× týždenne je to mierny deficit.</p>`)}
+    ${shAcc('apple','Koľko bielkovín?',`<p>180 g denne, približne 2,2 g na kilogram. Rozdeľ ich do každého hlavného jedla.</p>`)}
+    ${shAcc('list','Musím počítať kalórie?',`<p>Nie. Protokol, nie denník. Keď máš v jedle dosť bielkovín a nevynechávaš, makrá sa zložia samy.</p>`)}
+    ${shAcc('clock','Kedy jesť naposledy?',`<p>3 až 4 hodiny pred spánkom. Kávu ukonči do 13. až 14. hodiny.</p>`)}`;
+}
+function krok1Topics(){
+  const b=krok1Bodies();
+  return [
+    {id:'macros',ic:'list',nm:'Čo sú makronutrienty a ako ich nastaviť?',ds:'Bielkoviny, sacharidy a tuky v tvojom cieli.',body:b[1]},
+    {id:'food',ic:'apple',nm:'Tabuľka potravín',ds:'Zdravšie vs. menej vhodné.',body:krok1FoodBody()},
+    {id:'plan',ic:'list',nm:'Orientačný jedálniček',ds:'Tipy na jedlá a porcie podľa tvojho cieľa.',body:b[0]},
+    {id:'rules',ic:'check',nm:'Pravidlá stravovania',ds:'Jednoduché zásady pre lepšie výsledky.',body:b[3]},
+    {id:'track',ic:'activity',nm:'Presné trackovanie',ds:'Protokol, nie denník každého sústa.',body:krok1TrackBody()},
+    {id:'recipes',ic:'flame',nm:'Recepty',ds:'Rýchle jedlá k tvojim číslam.',soon:true},
+    {id:'tips',ic:'star',nm:'Rady a tipy',ds:'Praktické tipy do každého dňa.',body:krok1TipsBody()},
+    {id:'faq',ic:'info',nm:'Často kladené otázky',ds:'Najčastejšie otázky a stručné odpovede.',body:krok1FaqBody()},
+    {id:'done',ic:'checkDone',nm:'Rozumiem, viem sa stravovať',ds:'Prešiel som si informácie v tomto kroku.',done:true}
+  ];
+}
+let krokSheetFrom=null;
+function openKrok1Video(){
+  sheet(`<div class="sh-hero"><span class="badge-pill">Video</span><h3>Ako funguje výživa?</h3>
+    <p>2-minútové vysvetlenie, ako poskladať stravu k tvojmu cieľu.</p></div>`,
+    ()=>openKrokSheet(1,krokSheetFrom));
+}
+function openKrok1Topic(id){
+  const t=krok1Topics().find(x=>x.id===id);
+  if(!t) return;
+  if(t.done){ toggleStageDone(1); return; }
+  const body=t.soon
+    ? `<p>Pripravujeme. Kým budú, drž 1 950 kcal a bielkoviny v každom jedle.</p>`
+    : t.body;
+  sheet(`<div class="sh-hero"><span class="badge-pill">Výživa</span><h3>${t.nm}</h3></div>${body}`,
+    ()=>openKrokSheet(1,krokSheetFrom));
+}
+function krok1HubHtml(s,fromArea,lock){
+  const rows=krok1Topics().map(t=>{
+    if(t.done||t.photo) return areaRow(t.ic,t.nm,t.ds,t.photo||'',`openKrok1Topic('${t.id}')`,t.pos);
+    return shAcc(t.ic,t.nm,t.soon?`<p>Pripravujeme. Kým budú, drž 1 950 kcal a bielkoviny v každom jedle.</p>`:t.body);
+  }).join('');
+  const ghost=fromArea
+    ? `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet()">Späť na oblasť</button>`
+    : `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet();go('kroky')">Všetky kroky</button>`;
+  return `<div class="sh-hero">
+      <span class="badge-pill">${areaTitle(s.area)} · krok ${stageNo(s)}</span>
+      <h3>Výživa</h3>
+      <p class="sh-lead">Lepšie jedlo. Viac energie. Lepší výkon.<br>Nauč sa, ako poskladať stravu, ktorá podporí tvoje ciele.</p>
+    </div>
+    <button type="button" class="an-video" onclick="openKrok1Video()">
+      <img src="${AREA_COVER.VÝŽIVA}" alt="" style="object-position:center 78%">
+      <span class="an-play">${ic('play',18)}</span>
+      <span class="an-video-t"><b>Ako funguje výživa?</b><span>2-minútové video vysvetlenie</span></span>
+    </button>
+    ${krok1Intake()}
+    ${rows}
+    <button class="cta" style="margin-top:6px;${lock?'opacity:.4':''}" onclick="toggleStageDone(${s.id})">${lock?'Zamknuté':(s.done?'Označiť ako nesplnené':'Splniť krok')}</button>
+    ${ghost}`;
+}
 function krok1Bodies(){
   const m=KROK1.macros;
   return [
@@ -1587,26 +1694,25 @@ function krok1Bodies(){
   ];
 }
 function openKrokSheet(id,from){
+  krokSheetFrom=from||null;
   const s=STAGES.find(x=>x.id===id);
   const lock=stageLocked(s);
-  const rich=s.id===1;
-  const bodies=rich?krok1Bodies():null;
   const areaIdx=AREAS.findIndex(a=>a.k===s.area);
   const fromArea=from==='area' && areaIdx>=0;
-  const lead=rich
-    ?'Tvoje cieľové čísla pri chudnutí — 82 kg, pohyb 1–2× týždenne. Protokol, nie denník jedál.'
-    :'Úlohy, ktoré tento krok drží pohromade.';
+  if(s.id===1){
+    sheet(`${shCover(s.area)}${krok1HubHtml(s,fromArea,lock)}`, fromArea?()=>closeSheet():null);
+    return;
+  }
   const ghost=fromArea
     ? `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet()">Späť na oblasť</button>`
     : `<button class="cta ghost" style="margin-top:8px;" onclick="closeSheet();go('kroky')">Všetky kroky</button>`;
   sheet(`${shCover(s.area)}<div class="sh-hero">
       <span class="badge-pill">${areaTitle(s.area)} · krok ${stageNo(s)}</span>
       <h3>${s.nm}</h3>
-      <p class="sh-lead">${lead}</p>
+      <p class="sh-lead">Úlohy, ktoré tento krok drží pohromade.</p>
     </div>
-    ${rich?krok1Metric():''}
-    <div class="sh-sec">${rich?'Úlohy v tomto kroku':'Čo tento krok obsahuje'}</div>
-    ${s.acts.map((a,i)=>shAcc(actIcon(s,i),a.nm,a.lock?null:(rich?bodies[i]:(s.id===6&&i===0?spanokRhythmBody():(s.id===2&&i===0?pohybStrengthBody():`<p>${a.det}</p>`))),a.lock||null)).join('')}
+    <div class="sh-sec">Čo tento krok obsahuje</div>
+    ${s.acts.map((a,i)=>shAcc(actIcon(s,i),a.nm,a.lock?null:(s.id===6&&i===0?spanokRhythmBody():(s.id===2&&i===0?pohybStrengthBody():`<p>${a.det}</p>`)),a.lock||null)).join('')}
     <button class="cta" style="margin-top:14px;${lock?'opacity:.4':''}" onclick="toggleStageDone(${s.id})">${lock?'Zamknuté':(s.done?'Označiť ako nesplnené':'Splniť krok')}</button>
     ${ghost}`, fromArea?()=>closeSheet():null);
 }
@@ -1668,9 +1774,11 @@ function areaLead(t){
   const i=t.indexOf('. ');
   return i>0?t.slice(0,i+1):t;
 }
-function areaRow(icon,title,desc,photo,fn,pos){
+function areaRow(icon,title,desc,photo,fn,pos,kind){
+  const thumb=kind==='thumb';
+  const bleed=!!(photo&&!thumb);
   const img=photo?`<img class="ph" alt="" style="--pos:${pos||'left center'}" src="${photo}">`:'';
-  return `<button type="button" class="mcard glass${photo?' has-photo':''}" onclick="${fn}">${img}${photo?'<span class="photo-veil"></span>':''}<span class="ic">${ic(icon,17)}</span><span class="tt"><span class="nm">${title}</span><span class="ds">${desc}</span></span><span class="cv">${ICO.chr}</span></button>`;
+  return `<button type="button" class="mcard glass${bleed?' has-photo':''}" onclick="${fn}">${bleed?img+'<span class="photo-veil"></span>':''}<span class="ic">${ic(icon,17)}</span><span class="tt"><span class="nm">${title}</span><span class="ds">${desc}</span></span>${thumb?img:''}<span class="cv">${ICO.chr}</span></button>`;
 }
 function areaSheet(a,title,body,cta){
   sheet(`<div class="sh-hero">
@@ -1902,6 +2010,7 @@ function sheet(h,onBack){
   const back=document.getElementById('sheet-back');
   body.innerHTML=h;
   sh.classList.toggle('has-cover', !!body.querySelector('.sh-cover'));
+  sh.classList.toggle('has-back', !!onBack);
   back.hidden=!onBack;
   back.onclick=onBack||null;
   document.getElementById('ovl').hidden=false;
